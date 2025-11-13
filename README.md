@@ -165,3 +165,6 @@ MVPの基盤を生かしてUXを高める。
 
 - MVPでは「いいね整理アプリ」として完結
 - 将来的にはAIによるプラン自動生成・マップ提案へ拡張予定
+
+## 画面遷移図
+figma: https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?node-id=37-66&t=S2zfhjsOO8LLG0yE-0
