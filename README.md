@@ -168,3 +168,6 @@ MVPの基盤を生かしてUXを高める。
 
 ## 画面遷移図
 figma: https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?node-id=37-66&t=S2zfhjsOO8LLG0yE-0
+
+## ER図
+[![Image from Gyazo](https://i.gyazo.com/425a810b2694508ca7e5d2fdf2486617.png)](https://gyazo.com/425a810b2694508ca7e5d2fdf2486617)
