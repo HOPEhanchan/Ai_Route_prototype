@@ -170,4 +170,4 @@ MVPの基盤を生かしてUXを高める。
 figma: https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?node-id=37-66&t=S2zfhjsOO8LLG0yE-0
 
 ## ER図
-[![Image from Gyazo](https://i.gyazo.com/425a810b2694508ca7e5d2fdf2486617.png)](https://gyazo.com/425a810b2694508ca7e5d2fdf2486617)
+[![Image from Gyazo](https://i.gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e.png)](https://gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e)
