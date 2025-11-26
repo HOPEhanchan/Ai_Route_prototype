@@ -13,22 +13,30 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="min-h-screen bg-gray-50">
     <header>
-      <% if user_signed_in? %>
-        <span><%= current_user.email %> さん</span>
-        <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "新規登録", new_user_registration_path %>
-      <% end %>
+      <%= render 'shared/header' %>
     </header>
 
-    <%= yield %>
+    <main class="max-w-4xl mx-auto px-4 py-6">
+      <% flash.each do |type, message| %>
+        <% css_class = case type.to_sym
+          when :notice then 'bg-green-100 border-green-500 text-green-900'
+          when :alert  then 'bg-red-100 border-red-500 text-red-900'
+          else 'bg-gray-100 border-gray-400 text-gray-900'
+        end %>
+
+        <div class="mb-4 border-l-4 p-3 rounded <%= css_class %>">
+          <p><%= message %></p>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

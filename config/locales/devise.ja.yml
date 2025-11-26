@@ -29,12 +29,23 @@ ja:
       failure: "%{kind} からの認証に失敗しました（理由: \"%{reason}\"）。"
       success: "%{kind} アカウントで認証しました。"
     passwords:
+      new:
+        title: "パスワード再設定"
+        email: "登録メールアドレス"
+        send: "再設定メールを送信"
       no_token: "パスワード再設定メールからアクセスしてください。URLを途中で切らずに、そのまま開いているか確認してください。"
       send_instructions: "数分以内にパスワード再設定のご案内メールをお送りします。"
       send_paranoid_instructions: "もしそのメールアドレスが登録されていれば、パスワード再設定用のメールを数分以内にお送りします。"
       updated: "パスワードを変更しました。ログインしています。"
       updated_not_active: "パスワードを変更しました。"
     registrations:
+      new:
+        title: "新規登録"
+        sign_up: "新規登録"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        minimum_password_length: "パスワードは%{count}文字以上で入力してください"
       destroyed: "アカウントを削除しました。またのご利用をお待ちしています。"
       signed_up: "アカウント登録が完了しました。"
       signed_up_but_inactive: "登録は完了しましたが、アカウントがまだ有効化されていないためログインできません。"
@@ -45,14 +56,18 @@ ja:
       updated_but_not_signed_in: "アカウント情報を更新しました。パスワードを変更したため、再度ログインが必要です。"
     sessions:
       new:
+        title: "ログイン"
         sign_in: "ログイン"
         email: "メールアドレス"
         password: "パスワード"
         remember_me: "ログイン状態を保持する"
+        sign_up: "新規登録"
+        forgot_your_password?: "パスワードを忘れた方はこちら"
+
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
       already_signed_out: "すでにログアウト済みです。"
-      sign_up: "サインアップ"
+      sign_up: "新規登録"
       forgot_your_password?: "パスワードを忘れた方はこちら"
     unlocks:
       send_instructions: "アカウントロック解除のご案内メールを数分以内にお送りします。"

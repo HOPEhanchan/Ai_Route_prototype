@@ -1,0 +1,44 @@
+<nav class="bg-white border-b border-gray-200">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <!-- 左側：ロゴ＋アプリ名 -->
+    <div class="flex items-baseline gap-2 min-w-0">
+      <span class="text-lg sm:text-xl font-bold text-emerald-500 whitespace-nowrap">
+        <%= t("header.title") %>
+      </span>
+
+      <span class="hidden sm:inline text-xs text-gray-500">
+        <%= t("header.tagline") %>
+      </span>
+    </div>
+
+    <!-- 右側：リンク -->
+    <div class="flex items-center gap-3 text-xs sm:text-sm flex-wrap sm:flex-nowrap">
+
+      <% if user_signed_in? %>
+        <%= link_to t("header.nav.lists"),
+                    root_path,
+                    class: "text-gray-700 hover:text-emerald-500 whitespace-nowrap" %>
+
+        <span class="text-gray-500 hidden sm:inline max-w-xs truncate">
+          <%= current_user.email %>
+        </span>
+
+        <%= button_to t("header.nav.logout"),
+                      destroy_user_session_path,
+                      method: :delete,
+                      data: { turbo_confirm: t("header.nav.logout_confirm") },
+                      class: "px-3 py-1 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs sm:text-sm" %>
+      <% else %>
+        <%= link_to t("header.nav.login"),
+                    new_user_session_path,
+                    class: "text-gray-700 hover:text-emerald-500" %>
+
+        <%= link_to t("header.nav.signup"),
+                    new_user_registration_path,
+                    class: "px-3 py-1 rounded bg-emerald-500 text-white text-xs sm:text-sm hover:bg-emerald-600" %>
+      <% end %>
+    </div>
+
+  </div>
+</nav>
