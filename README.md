@@ -1,5 +1,5 @@
-# Ai_Route_prototype
-My graduation production app
+# Ai_Route_prototype　URL
+My graduation production app (*URL未)
 
 ## サービス概要
 
@@ -158,6 +158,16 @@ MVPの基盤を生かしてUXを高める。
 | デプロイ | Render（無料枠）|
 | 環境変数 | dotenv-rails |
 | 日本語化 | rails-i18n |
+
+---
+
+## 画面遷移図
+https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?node-id=37-66&t=S2zfhjsOO8LLG0yE-0
+
+---
+
+## ER図
+[![Image from Gyazo](https://i.gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e.png)](https://gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e)
 
 ---
 
