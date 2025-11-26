@@ -14,8 +14,11 @@ AllCops:
     - 'config/**/*'
     - 'node_modules/**/*'
     - 'vendor/**/*'
-    - 'test/**/*'
-    - 'spec/**/*'
+#    - 'test/**/*'
+#    - 'spec/**/*'
 
 Layout/LineLength:
   Max: 140
+
+Style/Documentation:
+  Enabled: false
