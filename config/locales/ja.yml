@@ -1,0 +1,10 @@
+ja:
+  header:
+    title: "AiRoute"
+    tagline: "「行きたい」をちゃんと叶える行き先リスト"
+    nav:
+      lists: "行きたいリスト"
+      login: "ログイン"
+      signup: "新規登録"
+      logout: "ログアウト"
+      logout_confirm: "ログアウトしますか？"
