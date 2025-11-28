@@ -13,23 +13,41 @@
     </div>
 
     <!-- 右側：リンク -->
-    <div class="flex items-center gap-3 text-xs sm:text-sm flex-wrap sm:flex-nowrap">
+    <div class="flex items-center gap-4 text-xs sm:text-sm flex-wrap sm:flex-nowrap">
 
       <% if user_signed_in? %>
+
+        <!-- ナビ：行き先リスト -->
         <%= link_to t("header.nav.lists"),
                     lists_path,
-                    class: "text-gray-700 hover:text-emerald-500 whitespace-nowrap" %>
+                    class: "px-2 py-1 bg-emerald-50 text-emerald-600
+                            border border-emerald-200 rounded
+                            hover:bg-emerald-100 font-medium whitespace-nowrap" %>
 
-        <span class="text-gray-500 hidden sm:inline max-w-xs truncate">
-          <%= current_user.email %>
-        </span>
+        <!-- ユーザー情報 -->
+        <div class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded">
+          <!-- 仮アバター（ユーザーアイコン枠） -->
+          <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs text-white">
+            <%# 本当は画像を入れる場所。今はダミーイニシャル %>
+            <%= current_user.email.first.upcase %>
+          </div>
 
+          <!-- メールアドレス -->
+          <span class="text-gray-600 text-xs sm:text-sm max-w-[140px] truncate">
+            <%= current_user.email %>
+          </span>
+        </div>
+
+        <!-- ログアウトボタン -->
         <%= button_to t("header.nav.logout"),
                       destroy_user_session_path,
                       method: :delete,
                       data: { turbo_confirm: t("header.nav.logout_confirm") },
-                      class: "px-3 py-1 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs sm:text-sm" %>
+                      class: "px-3 py-1 rounded bg-red-50 text-red-600 border border-red-200
+                              hover:bg-red-100 text-xs sm:text-sm whitespace-nowrap" %>
+
       <% else %>
+        <!-- 未ログイン時 -->
         <%= link_to t("header.nav.login"),
                     new_user_session_path,
                     class: "text-gray-700 hover:text-emerald-500" %>
@@ -39,6 +57,5 @@
                     class: "px-3 py-1 rounded bg-emerald-500 text-white text-xs sm:text-sm hover:bg-emerald-600" %>
       <% end %>
     </div>
-
   </div>
 </nav>
