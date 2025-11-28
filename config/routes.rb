@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "lists#index"
+  root 'lists#index'
 
   devise_for :users
 
@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :lists
   end
 
-  get "lists/index"
+  # Render スリープ対策用のヘルスチェック
+  get 'healthcheck', to: proc { [200, { 'Content-Type' => 'text/plain' }, ['ok']] }
 end
