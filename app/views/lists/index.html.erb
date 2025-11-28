@@ -1,6 +1,48 @@
-<h1>AiRoute（MVP）</h1>
-<p>ここに「行きたいスポットのリスト」が並ぶ予定です。</p>
-<div class="text-red-600 text-xl">Tailwind動いてる？</div>
-<div class="bg-red-500 text-white text-2xl p-6 rounded">
-  Tailwind動いてる？？🔥
+<div class="max-w-2xl mx-auto px-4 py-6 space-y-4">
+  <div class="flex items-center justify-between mb-2">
+    <h1 class="text-xl font-bold text-emerald-500 mb-2">
+      あなたの行きたいリスト
+    </h1>
+
+    <%= link_to "+ 新しいリスト",
+                new_list_path,
+                class: "inline-flex items-center px-3 py-1 rounded text-xs sm:text-sm bg-emerald-500 text-white hover:bg-emerald-600" %>
+  </div>
+
+  <% if @lists.any? %>
+    <div class="space-y-3">
+      <% @lists.each do |list| %>
+        <div class="p-3 rounded-lg border bg-white shadow-sm">
+          <div class="flex justify-between items-center gap-3">
+            <!-- 左側：リスト情報 -->
+            <div>
+              <div class="text-xs text-gray-500">
+                作成日: <%= l list.created_at.to_date %>
+              </div>
+              <div class="font-semibold text-gray-800">
+                <%= list.name %>
+              </div>
+            </div>
+
+            <!-- 右側：編集＆削除ボタン -->
+            <div class="flex gap-2 text-xs">
+              <%= link_to "編集",
+                          edit_list_path(list),
+                          class: "text-gray-500 hover:text-gray-700" %>
+
+              <%= button_to "削除",
+                            list_path(list),
+                            method: :delete,
+                            data: { turbo_confirm: "このリストを削除しますか？" },
+                            class: "text-red-500 hover:text-red-600" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-sm text-gray-500">
+      まだ行き先リストがありません。右上の「＋」から作成してみましょう。
+    </p>
+  <% end %>
 </div>

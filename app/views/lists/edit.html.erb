@@ -1,0 +1,52 @@
+<div class="min-h-[60vh] bg-slate-50">
+  <div class="max-w-md mx-auto px-4 py-8">
+    <!-- タイトル＋説明 -->
+    <div class="mb-6">
+      <h1 class="text-xl font-bold text-emerald-600">
+        行き先リストを編集
+      </h1>
+      <p class="mt-2 text-sm text-gray-600">
+        リスト名を変更して、「どんなときに使う行き先リスト」なのか<br>
+        自分にも相手にも分かりやすくしておきましょう。
+      </p>
+    </div>
+
+    <!-- カード風フォーム -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <%= form_with model: @list, local: true, class: "space-y-5" do |f| %>
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <%= f.label :name,
+                        "リスト名",
+                        class: "block text-sm font-medium text-gray-700" %>
+            <span class="text-xs text-emerald-500">
+              必須
+            </span>
+          </div>
+
+          <%= f.text_field :name,
+                placeholder: "例）次の三連休で行きたいところ",
+                class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                        shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+
+          <p class="mt-1 text-xs text-gray-500">
+            ここで変更したリスト名は、行き先リスト一覧にもそのまま反映されます。
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+          <%= link_to "キャンセル",
+                      lists_path,
+                      class: "text-xs sm:text-sm text-gray-500 hover:text-gray-700" %>
+
+          <div class="flex gap-2">
+            <%= f.submit "更新する",
+                  class: "inline-flex items-center px-4 py-2 rounded-lg text-xs sm:text-sm
+                          bg-emerald-500 text-white font-medium hover:bg-emerald-600
+                          disabled:opacity-60 disabled:cursor-not-allowed" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
