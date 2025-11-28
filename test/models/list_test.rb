@@ -1,7 +1,5 @@
-require "test_helper"
+require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # ここに必要なテストを書く予定
 end
