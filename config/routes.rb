@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  authenticate :user do
+    resources :lists
+  end
+
   get "lists/index"
 end
