@@ -24,18 +24,26 @@
                             border border-emerald-200 rounded
                             hover:bg-emerald-100 font-medium whitespace-nowrap" %>
 
+        <!-- ナビ：スポット一覧 -->
+        <%= link_to t("header.nav.spots"),
+                    spots_path,
+                    class: "px-2 py-1 bg-white text-emerald-600
+                            border border-emerald-200 rounded
+                            hover:bg-emerald-50 font-medium whitespace-nowrap" %>
+
         <!-- ユーザー情報 -->
         <div class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded">
-          <!-- 仮アバター（ユーザーアイコン枠） -->
+
+          <!-- アバター（SP/PC 両方に表示） -->
           <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs text-white">
-            <%# 本当は画像を入れる場所。今はダミーイニシャル %>
             <%= current_user.email.first.upcase %>
           </div>
 
-          <!-- メールアドレス -->
-          <span class="text-gray-600 text-xs sm:text-sm max-w-[140px] truncate">
+          <!-- メールアドレス（PCのみ表示） -->
+          <span class="hidden sm:inline text-gray-600 text-xs sm:text-sm max-w-[140px] truncate">
             <%= current_user.email %>
           </span>
+
         </div>
 
         <!-- ログアウトボタン -->

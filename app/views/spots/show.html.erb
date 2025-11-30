@@ -1,0 +1,82 @@
+<div class="min-h-[60vh] bg-slate-50">
+  <div class="max-w-2xl mx-auto px-4 py-8 space-y-4">
+    <!-- タイトル -->
+    <div>
+      <p class="text-xs text-gray-500 mb-1">
+        行きたいスポットの詳細
+      </p>
+      <h1 class="text-xl font-bold text-emerald-600 break-words">
+        <%= @spot.title.presence || "（タイトル未入力）" %>
+      </h1>
+    </div>
+
+    <!-- カード -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-4">
+
+      <!-- 画像プレビュー -->
+      <% if @spot.image_url.present? %>
+        <div>
+          <%= image_tag @spot.image_url,
+                class: "w-full max-h-60 object-cover rounded-lg border border-slate-200" %>
+        </div>
+      <% end %>
+
+      <!-- URL -->
+      <% if @spot.url.present? %>
+        <div>
+          <p class="text-xs font-medium text-gray-500 mb-1">スポットURL</p>
+          <a href="<%= @spot.url %>"
+            target="_blank" rel="noopener"
+            class="inline-flex items-center text-sm text-emerald-600 hover:text-emerald-700 break-all">
+            <%= @spot.url %>
+          </a>
+        </div>
+      <% end %>
+
+      <!-- メモ（description） -->
+      <% if @spot.description.present? %>
+        <div>
+          <p class="text-xs font-medium text-gray-500 mb-1">メモ（引用や気になるポイント）</p>
+          <p class="text-sm text-gray-700 whitespace-pre-wrap">
+            <%= @spot.description %>
+          </p>
+        </div>
+      <% end %>
+
+      <!-- ひとことメモ -->
+      <% if @spot.memo.present? %>
+        <div>
+          <p class="text-xs font-medium text-gray-500 mb-1">ひとことメモ</p>
+          <p class="text-sm text-gray-700">
+            <%= @spot.memo %>
+          </p>
+        </div>
+      <% end %>
+
+      <!-- 作成・更新日 -->
+      <div class="pt-3 border-t border-slate-100 text-[11px] text-gray-400 flex flex-wrap gap-x-4 gap-y-1">
+        <span>作成日: <%= l @spot.created_at.to_date %></span>
+        <span>更新日: <%= l @spot.updated_at.to_date %></span>
+      </div>
+    </div>
+
+    <!-- アクション -->
+    <div class="flex justify-between items-center">
+      <%= link_to "一覧に戻る",
+                  spots_path,
+                  class: "text-xs sm:text-sm text-gray-500 hover:text-gray-700" %>
+
+      <div class="flex gap-2 text-xs sm:text-sm">
+        <%= link_to "編集",
+                    edit_spot_path(@spot),
+                    class: "px-3 py-1 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100" %>
+
+        <%= button_to "削除",
+                      spot_path(@spot),
+                      method: :delete,
+                      data: { turbo_confirm: "このスポットを削除しますか？" },
+                      class: "px-3 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100" %>
+      </div>
+    </div>
+  </div>
+</div>
