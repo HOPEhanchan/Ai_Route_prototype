@@ -1,7 +1,7 @@
 ja:
   header:
     title: "AiRoute"
-    tagline: "「行きたい」を一緒に叶える♡お気に入り箱"
+    tagline: "「行きたい」を叶える♡いいね整理箱"
     nav:
       lists: "リスト一覧"
       spots: "スポット一覧"
@@ -10,6 +10,7 @@ ja:
       signup: "新規登録"
       logout: "ログアウト"
       logout_confirm: "ログアウトしますか？"
+      about: "このアプリについて"
 
   activerecord:
     attributes:

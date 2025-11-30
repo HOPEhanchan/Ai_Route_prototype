@@ -12,17 +12,18 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     added_attrs = %i[name avatar_url profile]
 
-    devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
+    devise_parameter_sanitizer.permit(:sign_up,        keys: added_attrs)
     devise_parameter_sanitizer.permit(:account_update, keys: added_attrs)
   end
 
   # ログイン後の遷移先
   def after_sign_in_path_for(_resource)
-    root_path
+    authenticated_root_path
   end
 
   # ログアウト後の遷移先
   def after_sign_out_path_for(_resource_or_scope)
-    new_user_session_path
+    flash[:notice] = 'ログアウトしました'
+    root_path # → static_pages#landing
   end
 end
