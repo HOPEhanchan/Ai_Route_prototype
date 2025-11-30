@@ -5,6 +5,7 @@ ja:
     nav:
       lists: "行きたいリスト"
       spots: "スポット一覧"
+      profile: "プロフィール"
       login: "ログイン"
       signup: "新規登録"
       logout: "ログアウト"
