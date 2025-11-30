@@ -13,6 +13,16 @@
 
     <!-- カード風フォーム -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <% if @list.errors.any? %>
+        <div class="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+          <p class="font-semibold mb-1">入力内容にエラーがあります。</p>
+          <ul class="list-disc list-inside">
+            <% @list.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= form_with model: @list, local: true, class: "space-y-5" do |f| %>
         <div>
           <div class="flex items-center justify-between mb-1">

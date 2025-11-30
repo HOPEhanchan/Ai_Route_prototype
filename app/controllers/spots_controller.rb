@@ -5,7 +5,9 @@ class SpotsController < ApplicationController
   before_action :set_spot, only: %i[show edit update destroy]
 
   def index
-    @spots = current_user.spots.order(created_at: :desc)
+    @lists = current_user.lists.order(created_at: :desc)
+    @current_list = current_user.lists.find_by(id: params[:list_id])
+    @spots = fetch_spots
   end
 
   def show; end
@@ -54,8 +56,19 @@ class SpotsController < ApplicationController
       :url,
       :description,
       :image_url,
-      :memo
-      # list_ids, tag_names は後続Issueで
+      :memo,
+      list_ids: []
+      # tag_names は後続Issueで
     )
+  end
+
+  def fetch_spots
+    if @current_list
+      @current_list.spots.order(created_at: :desc)
+    elsif params[:list_id].present?
+      current_user.spots.none
+    else
+      current_user.spots.order(created_at: :desc)
+    end
   end
 end

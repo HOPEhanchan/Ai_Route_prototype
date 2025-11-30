@@ -3,16 +3,26 @@
     <!-- タイトル＋説明 -->
     <div class="mb-6">
       <h1 class="text-xl font-bold text-emerald-600">
-        行き先リストを編集
+        リスト名を編集
       </h1>
       <p class="mt-2 text-sm text-gray-600">
-        リスト名を変更して、「どんなときに使う行き先リスト」なのか<br>
-        自分にも相手にも分かりやすくしておきましょう。
+        リスト名を変更して、「どんな行き先リスト」なのか<br>
+        見返した時に分かりやすくしておきましょう。
       </p>
     </div>
 
     <!-- カード風フォーム -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <% if @list.errors.any? %>
+        <div class="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+          <p class="font-semibold mb-1">入力内容にエラーがあります。</p>
+          <ul class="list-disc list-inside">
+            <% @list.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= form_with model: @list, local: true, class: "space-y-5" do |f| %>
         <div>
           <div class="flex items-center justify-between mb-1">
@@ -30,7 +40,7 @@
                         shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
 
           <p class="mt-1 text-xs text-gray-500">
-            ここで変更したリスト名は、行き先リスト一覧にもそのまま反映されます。
+            ここで変更したリスト名は、スポット一覧のリストタブにも反映されます。
           </p>
         </div>
 

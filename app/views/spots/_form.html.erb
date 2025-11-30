@@ -75,17 +75,32 @@
       <% end %>
     </div>
 
-    <!-- 行き先リスト選択（※あとで本物にする） -->
+    <!-- 行き先リスト選択 -->
     <div class="pt-3 border-t border-slate-100">
       <p class="text-xs font-medium text-gray-700 mb-1">
-        どの「行き先リスト」に入れるか（※この連携は後続Issueで実装）
+        どの「行き先リスト」に入れる？
       </p>
-      <select
-        class="w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-xs text-gray-500"
-        disabled
-      >
-        <option>行き先リストとの連携は、次のIssueで実装予定です</option>
-      </select>
+
+      <% if current_user.lists.any? %>
+        <div class="flex flex-wrap gap-2">
+          <%= f.collection_check_boxes :list_ids, current_user.lists, :id, :name do |b| %>
+            <label class="inline-flex items-center gap-1 px-3 py-1 rounded-full
+                          border border-slate-300 bg-slate-50 text-xs text-gray-700
+                          hover:border-emerald-300 hover:bg-emerald-50 cursor-pointer">
+              <%= b.check_box class: "rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" %>
+              <span class="truncate max-w-[140px]">
+                <%= b.text %>
+              </span>
+            </label>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-500">
+          まだ行き先リストがありません。<br>
+          先に <%= link_to "リストを作成", new_list_path, class: "text-emerald-600 underline decoration-emerald-300" %>
+          してから、スポットを登録しましょう。
+        </p>
+      <% end %>
     </div>
 
     <!-- タグ入力（UIだけ先に用意） -->
