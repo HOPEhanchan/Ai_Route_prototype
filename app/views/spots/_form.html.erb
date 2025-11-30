@@ -1,0 +1,118 @@
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+  <% if spot.errors.any? %>
+    <div class="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+      <p class="font-semibold mb-1">
+        入力内容にエラーがあります。
+      </p>
+      <ul class="list-disc list-inside">
+        <% spot.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: spot, local: true, class: "space-y-5" do |f| %>
+    <!-- URL -->
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <%= f.label :url, "スポットのURL", class: "block text-sm font-medium text-gray-700" %>
+        <span class="text-xs text-emerald-500">必須</span>
+      </div>
+      <%= f.url_field :url,
+            placeholder: "例）https://example.com/awesome-spot",
+            class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+    </div>
+
+    <!-- タイトル -->
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <%= f.label :title, "タイトル", class: "block text-sm font-medium text-gray-700" %>
+        <span class="text-xs text-emerald-500">必須</span>
+      </div>
+      <%= f.text_field :title,
+            placeholder: "例）雰囲気最高の夜景バー",
+            class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+    </div>
+
+    <!-- メモ（description） -->
+    <div>
+      <%= f.label :description, "メモ（引用や気になるポイントなど）",
+            class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :description,
+            rows: 3,
+            placeholder: "気になった理由や、サイトからの引用メモなどを書いておきましょう。",
+            class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+    </div>
+
+    <!-- ひとことメモ -->
+    <div>
+      <%= f.label :memo, "ひとことメモ（相手に伝えたいこと）",
+            class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :memo,
+            placeholder: "例）記念日に使いたい / 個室あり / 雨の日でもOK など",
+            class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+    </div>
+
+    <!-- 画像URL（任意） -->
+    <div>
+      <%= f.label :image_url, "画像URL（任意）",
+            class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.url_field :image_url,
+            placeholder: "サムネイル用の画像URLがあれば入力",
+            class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+
+      <% if spot.image_url.present? %>
+        <div class="mt-3">
+          <%= image_tag spot.image_url,
+                class: "w-full max-h-48 object-cover rounded-lg border border-slate-200" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 行き先リスト選択（※あとで本物にする） -->
+    <div class="pt-3 border-t border-slate-100">
+      <p class="text-xs font-medium text-gray-700 mb-1">
+        どの「行き先リスト」に入れるか（※この連携は後続Issueで実装）
+      </p>
+      <select
+        class="w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-xs text-gray-500"
+        disabled
+      >
+        <option>行き先リストとの連携は、次のIssueで実装予定です</option>
+      </select>
+    </div>
+
+    <!-- タグ入力（UIだけ先に用意） -->
+    <div>
+      <p class="text-xs font-medium text-gray-700 mb-1">
+        タグ（ジャンルなど）※カンマ区切りで入力（後続Issueで保存ロジック実装）
+      </p>
+      <input
+        type="text"
+        name="spot[tag_names]"
+        placeholder="例）夜景, デート, 個室あり"
+        class="w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-xs text-gray-500"
+      >
+    </div>
+
+    <!-- ボタン -->
+    <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+      <%= link_to "キャンセル",
+                  spots_path,
+                  class: "text-xs sm:text-sm text-gray-500 hover:text-gray-700" %>
+
+      <div class="flex gap-2">
+        <%= f.submit "保存する",
+              class: "inline-flex items-center px-4 py-2 rounded-lg text-xs sm:text-sm
+                      bg-emerald-500 text-white font-medium hover:bg-emerald-600
+                      disabled:opacity-60 disabled:cursor-not-allowed" %>
+      </div>
+    </div>
+  <% end %>
+</div>

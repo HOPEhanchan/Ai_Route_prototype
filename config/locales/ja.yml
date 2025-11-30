@@ -4,6 +4,7 @@ ja:
     tagline: "「行きたい」を一緒に叶える♡お気に入り箱"
     nav:
       lists: "行きたいリスト"
+      spots: "スポット一覧"
       login: "ログイン"
       signup: "新規登録"
       logout: "ログアウト"

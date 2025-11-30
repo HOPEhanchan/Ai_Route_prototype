@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :lists
+    resources :spots
   end
 
   # Render スリープ対策用のヘルスチェック
