@@ -1,0 +1,93 @@
+<div class="min-h-[60vh] bg-slate-50">
+  <div class="max-w-3xl mx-auto px-4 py-8 space-y-4">
+
+    <!-- タイトル行：スマホでは縦 / PCでは横 -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+        <p class="text-xs text-gray-500 mb-1">行き先リスト</p>
+        <h1 class="text-xl font-bold text-emerald-600 break-words">
+          <span class="block max-w-[220px] truncate sm:max-w-none sm:whitespace-normal">
+            <%= @list.name %>
+          </span>
+        </h1>
+      </div>
+
+      <%= link_to "編集",
+                  edit_list_path(@list),
+                  class: "px-3 py-1 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100 text-xs sm:text-sm" %>
+    </div>
+
+    <% if @list.spots.any? %>
+      <div class="space-y-3">
+        <% @list.spots.each do |spot| %>
+          <% list_item = @list.list_items.find { |li| li.spot_id == spot.id } %>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+            <!-- スポット行：スマホで縦 / PCで横 -->
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+              <!-- 左：スポット情報 -->
+              <div>
+                <h2 class="font-semibold text-gray-800 text-sm sm:text-base">
+                  <span class="block max-w-[220px] truncate sm:max-w-none sm:whitespace-normal">
+                    <%= spot.title.presence || "（タイトル未入力）" %>
+                  </span>
+                </h2>
+
+                <% if spot.url.present? %>
+                  <a href="<%= spot.url %>"
+                     target="_blank" rel="noopener"
+                     class="inline-flex items-center text-xs text-emerald-600 hover:text-emerald-700 break-all mt-1">
+                    <%= spot.url %>
+                  </a>
+                <% end %>
+              </div>
+
+              <!-- 右：ボタン -->
+              <div class="flex flex-col sm:flex-row items-end sm:items-center gap-2 text-[11px] sm:text-xs">
+                <!-- スポット詳細ボタン -->
+                <%= link_to spot_path(spot),
+                            class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                    border border-slate-200 bg-white text-gray-700
+                                    hover:bg-slate-50 hover:border-emerald-200 hover:text-emerald-700
+                                    transition" do %>
+                  <span>詳細</span>
+                <% end %>
+
+                <!-- リストから外すボタン -->
+                <% if list_item %>
+                  <%= button_to list_list_item_path(@list, list_item),
+                                method: :delete,
+                                data: { turbo_confirm: "このリストから外しますか？" },
+                                class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                        border border-red-200 bg-red-50 text-red-700
+                                        hover:bg-red-100 transition" do %>
+                    <span>外す</span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    <% else %>
+      <div class="mt-6 rounded-xl border border-dashed border-slate-300 bg-white p-5 text-center">
+        <p class="text-sm text-gray-600">
+          まだこのリストには<br>
+          スポットが追加されていません。
+        </p>
+        <p class="mt-1 text-xs text-gray-500">
+          「📍スポット」一覧から、<br>
+          このリストに追加していきましょう。
+        </p>
+      </div>
+    <% end %>
+
+    <div class="mt-4">
+    <%= link_to "一覧に戻る",
+                lists_path,
+                class: "text-xs sm:text-sm text-gray-500 hover:text-gray-700" %>
+    </div>
+
+  </div>
+</div>
