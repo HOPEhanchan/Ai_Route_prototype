@@ -1,16 +1,22 @@
 <nav class="bg-white border-b border-gray-200">
   <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
 
-    <!-- 左側：ロゴ＋アプリ名 -->
+    <!-- 左側：ロゴ（アプリタイトルの下にタグライン） -->
     <div class="flex items-baseline gap-2 min-w-0">
-      <%= link_to lists_path, class: "flex items-baseline gap-2 min-w-0 no-underline" do %>
+      <%= link_to(
+            (user_signed_in? ?lists_path : root_path),
+            class: "flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2 min-w-0 no-underline"
+          ) do %>
+        <!-- アプリタイトル -->
         <span class="text-lg sm:text-xl font-bold text-emerald-500 whitespace-nowrap">
           <%= t("header.title") %>
         </span>
 
-        <span class="hidden sm:inline text-xs text-gray-500">
+        <!-- タグライン（PCのみ表示） -->
+        <span class="hidden sm:block text-xs text-gray-500 mt-0.5">
           <%= t("header.tagline") %>
         </span>
+
       <% end %>
     </div>
 
@@ -59,6 +65,13 @@
               <%= current_user.email %>
             </span>
           <% end %>
+
+          <!-- アプリ概要　📱 -->
+          <%= link_to "AiRouteについて",
+                      about_path,
+                      class: "px-2 py-1 bg-white text-emerald-600
+                              border border-emerald-200 rounded
+                              hover:bg-emerald-50 font-medium whitespace-nowrap" %>
 
           <!-- ログアウト -->
           <%= button_to t("header.nav.logout"),
@@ -133,6 +146,13 @@
                   <span>プロフィール</span>
                 </span>
               <% end %>
+
+              <!-- アプリ概要　📱 -->
+              <%= link_to "AiRouteとは？",
+                          about_path,
+                          class: "block px-3 py-2 text-xs
+                                  text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800
+                                  transition-colors" %>
 
               <!-- ログアウト　少し区切る -->
               <div class="mt-1 pt-1 border-t border-slate-100">
