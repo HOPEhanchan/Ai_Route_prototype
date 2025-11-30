@@ -1,0 +1,51 @@
+<div class="min-h-[60vh] bg-slate-50">
+  <div class="max-w-md mx-auto px-4 py-8 space-y-6">
+    <div>
+      <p class="text-xs text-gray-500 mb-1">
+        あなたのプロフィール
+      </p>
+      <h1 class="text-xl font-bold text-emerald-600">
+        <%= @user.name.presence || "名前未設定" %>
+      </h1>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-4">
+      <!-- アイコン -->
+      <div class="flex items-center gap-3">
+        <% if @user.avatar_url.present? %>
+          <%= image_tag @user.avatar_url,
+                class: "w-12 h-12 rounded-full object-cover border border-slate-200" %>
+        <% else %>
+          <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-lg font-semibold">
+            <%= (@user.name.presence || @user.email).first.upcase %>
+          </div>
+        <% end %>
+
+        <div class="text-sm text-gray-700">
+          <p class="font-semibold">
+            <%= @user.name.presence || "名前未設定" %>
+          </p>
+          <p class="text-xs text-gray-500 break-all">
+            <%= @user.email %>
+          </p>
+        </div>
+      </div>
+
+      <!-- ひとこと自己紹介 -->
+      <div>
+        <p class="text-xs font-medium text-gray-500 mb-1">
+          ひとこと自己紹介
+        </p>
+        <p class="text-sm text-gray-700 whitespace-pre-wrap">
+          <%= @user.profile.presence || "まだ自己紹介が登録されていません。" %>
+        </p>
+      </div>
+    </div>
+
+    <div class="flex justify-end">
+      <%= link_to "プロフィールを編集する",
+                  edit_profile_path,
+                  class: "px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm hover:bg-emerald-600" %>
+    </div>
+  </div>
+</div>

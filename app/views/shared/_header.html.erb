@@ -31,20 +31,27 @@
                             border border-emerald-200 rounded
                             hover:bg-emerald-50 font-medium whitespace-nowrap" %>
 
-        <!-- ユーザー情報 -->
-        <div class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded">
+        <!-- ユーザー情報（全体をプロフィールへのリンクに） -->
+        <%= link_to profile_path, class: "flex items-center gap-2 bg-gray-100 px-2 py-1 rounded no-underline" do %>
 
           <!-- アバター（SP/PC 両方に表示） -->
-          <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs text-white">
-            <%= current_user.email.first.upcase %>
-          </div>
+          <% if current_user.avatar_url.present? %>
+          <!-- 画像アイコン（avatar_url がある場合） -->
+            <img src="<%= current_user.avatar_url %>"
+                 alt="avatar"
+                 class="w-6 h-6 rounded-full object-cover border border-slate-300" />
+          <% else %>
+            <!-- 初期アイコン（頭文字） -->
+            <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs text-white">
+              <%= current_user.email.first.upcase %>
+            </div>
+          <% end %>
 
           <!-- メールアドレス（PCのみ表示） -->
-          <span class="hidden sm:inline text-gray-600 text-xs sm:text-sm max-w-[140px] truncate">
+          <span class="hidden sm:inline text-gray-600 text-xs sm:text-sm max-w-[140px] truncate hover:text-emerald-600">
             <%= current_user.email %>
           </span>
-
-        </div>
+        <% end %>
 
         <!-- ログアウトボタン -->
         <%= button_to t("header.nav.logout"),

@@ -167,7 +167,7 @@ https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?
 ---
 
 ## ER図
-[![Image from Gyazo](https://i.gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e.png)](https://gyazo.com/9321d9021a793f64c072d3b9d9e9ff5e)
+[![Image from Gyazo](https://i.gyazo.com/0faff74df14ddd729e5dc1c08a67454d.png)](https://gyazo.com/0faff74df14ddd729e5dc1c08a67454d)
 
 ---
 
