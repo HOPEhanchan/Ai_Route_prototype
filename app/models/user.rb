@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   has_many :lists, dependent: :destroy
-  # has_many :spots, dependent: :destroy ← SPOTS実装後に#解除
+  has_many :spots, dependent: :destroy
 
   devise :database_authenticatable,
          :registerable,

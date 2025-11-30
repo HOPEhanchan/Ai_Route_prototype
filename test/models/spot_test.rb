@@ -2,6 +2,6 @@
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class SpotTest < ActiveSupport::TestCase
   # ここに必要なテストを書く予定
 end
