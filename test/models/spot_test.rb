@@ -1,7 +1,7 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class SpotTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # ここに必要なテストを書く予定
 end
