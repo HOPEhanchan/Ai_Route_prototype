@@ -10,3 +10,11 @@ ja:
       signup: "新規登録"
       logout: "ログアウト"
       logout_confirm: "ログアウトしますか？"
+
+  activerecord:
+    attributes:
+      spot:
+        title: "タイトル"
+        url: "スポットのURL"
+      list:
+        name: "リスト名"

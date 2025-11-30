@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :lists do
       resources :list_items, only: %i[create destroy]
+      resources :spots, only: :index, module: :lists
     end
 
     resources :spots
