@@ -6,21 +6,8 @@ class SpotsController < ApplicationController
 
   def index
     @lists = current_user.lists.order(created_at: :desc)
-
-    if params[:list_id].present?
-      @current_list = current_user.lists.find_by(id: params[:list_id])
-
-      @spots =
-        if @current_list
-          @current_list.spots.order(created_at: :desc)
-        else
-          current_user.spots.none # 変な list_id が来たときは空
-        end
-
-    else
-      @current_list = nil
-      @spots = current_user.spots.order(created_at: :desc)
-    end
+    @current_list = current_user.lists.find_by(id: params[:list_id])
+    @spots = fetch_spots
   end
 
   def show; end
@@ -73,5 +60,15 @@ class SpotsController < ApplicationController
       list_ids: []
       # tag_names は後続Issueで
     )
+  end
+
+  def fetch_spots
+    if @current_list
+      @current_list.spots.order(created_at: :desc)
+    elsif params[:list_id].present?
+      current_user.spots.none
+    else
+      current_user.spots.order(created_at: :desc)
+    end
   end
 end
