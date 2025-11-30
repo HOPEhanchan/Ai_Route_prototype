@@ -2,10 +2,14 @@
 
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_list, only: %i[edit update destroy]
+  before_action :set_list, only: %i[show edit update destroy]
 
   def index
     @lists = current_user.lists.order(created_at: :desc)
+  end
+
+  def show
+    @spots = @list.spots.includes(:tags)
   end
 
   def new

@@ -78,5 +78,34 @@
                       class: "px-3 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100" %>
       </div>
     </div>
+    <!-- 🔽 リストに追加するUI -->
+    <div class="mt-6 rounded-xl border border-slate-200 bg-white p-4 space-y-3">
+      <p class="text-xs font-medium text-gray-700">
+        このスポットを「行き先リスト」に追加
+      </p>
+
+      <% if current_user.lists.any? %>
+        <div class="flex flex-wrap gap-2">
+          <% current_user.lists.each do |list| %>
+            <%= button_to list_list_items_path(list),
+                          params: { spot_id: @spot.id },
+                          method: :post,
+                          class: "inline-flex items-center gap-1 px-3 py-1.5 rounded-full
+                                  border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs
+                                  hover:bg-emerald-100" do %>
+              <span>📝</span>
+              <span class="truncate max-w-[140px]"><%= list.name %></span>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs text-gray-500">
+          まだ行き先リストがありません。
+          <%= link_to "リストを作成する",
+                      new_list_path,
+                      class: "text-emerald-600 underline decoration-emerald-300" %>
+        </p>
+      <% end %>
+    </div>
   </div>
 </div>

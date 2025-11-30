@@ -11,30 +11,49 @@
 
   <% if @lists.any? %>
     <div class="space-y-3">
-      <% @lists.each do |list| %>
-        <div class="p-3 rounded-lg border bg-white shadow-sm">
-          <div class="flex justify-between items-center gap-3">
+<% @lists.each do |list| %>
+  <div class="p-3 rounded-lg border bg-white shadow-sm">
+          <!-- スマホでは縦並び / sm以上で横並び -->
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <!-- 左側：リスト情報 -->
             <div>
               <div class="text-xs text-gray-500">
                 作成日: <%= l list.created_at.to_date %>
               </div>
               <div class="font-semibold text-gray-800">
-                <%= list.name %>
+                <span class="block max-w-[180px] truncate sm:max-w-none sm:whitespace-normal">
+                  <%= list.name %>
+                </span>
               </div>
             </div>
 
-            <!-- 右側：編集＆削除ボタン -->
-            <div class="flex gap-2 text-xs">
-              <%= link_to "編集",
-                          edit_list_path(list),
-                          class: "text-gray-500 hover:text-gray-700" %>
+            <!-- 右側：中身を見る / 編集＆削除ボタン -->
+            <div class="flex gap-2 text-xs sm:text-sm sm:justify-end">
+              <!-- 📝 このリストの中身を見る -->
+              <%= link_to list_path(list),
+                          class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                  border border-slate-300 bg-white text-slate-700
+                                  hover:bg-slate-100 hover:text-slate-900 transition" do %>
+                <span>開く</span>
+              <% end %>
 
-              <%= button_to "削除",
-                            list_path(list),
+              <!-- ✏️ 編集 -->
+              <%= link_to edit_list_path(list),
+                          class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                  border border-emerald-200 bg-emerald-50 text-emerald-700
+                                  hover:bg-emerald-100 transition" do %>
+                <span>編集</span>
+              <% end %>
+
+              <!-- ❌ 削除 -->
+              <%= button_to list_path(list),
                             method: :delete,
                             data: { turbo_confirm: "このリストを削除しますか？" },
-                            class: "text-red-500 hover:text-red-600" %>
+                            class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                    border border-red-200 bg-red-50 text-red-700
+                                    hover:bg-red-100 transition" do %>
+                <span>削除</span>
+              <% end %>
             </div>
           </div>
         </div>

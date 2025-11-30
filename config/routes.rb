@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  get "profiles/show"
-  get "profiles/edit"
   root 'lists#index'
 
   devise_for :users
 
   authenticate :user do
-    resources :lists
+    resources :lists do
+      resources :list_items, only: %i[create destroy]
+    end
+
     resources :spots
     resource :profile, only: %i[show edit update]
   end
