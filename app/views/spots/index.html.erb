@@ -85,20 +85,32 @@
                 作成日: <%= l spot.created_at.to_date %>
               </div>
 
-              <div class="flex gap-3">
-                <%= link_to "詳細を見る",
-                            spot_path(spot),
-                            class: "text-gray-600 hover:text-gray-800" %>
+              <div class="flex gap-2 text-[11px] sm:text-xs">
+                <!-- 詳細：リストの「開く」と同じニュートラルボタン -->
+                <%= link_to spot_path(spot),
+                            class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                    border border-slate-300 bg-white text-slate-700
+                                    hover:bg-slate-100 hover:text-slate-900 transition" do %>
+                  <span>詳細</span>
+                <% end %>
 
-                <%= link_to "編集",
-                            edit_spot_path(spot),
-                            class: "text-emerald-600 hover:text-emerald-700" %>
+                <!-- 編集：エメラルド系ボタン -->
+                <%= link_to edit_spot_path(spot),
+                            class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                    border border-emerald-200 bg-emerald-50 text-emerald-700
+                                    hover:bg-emerald-100 transition" do %>
+                  <span>編集</span>
+                <% end %>
 
-                <%= button_to "削除",
-                              spot_path(spot),
+                <!-- 削除：赤ボタン -->
+                <%= button_to spot_path(spot),
                               method: :delete,
                               data: { turbo_confirm: "このスポットを削除しますか？" },
-                              class: "text-red-500 hover:text-red-600" %>
+                              class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
+                                      border border-red-200 bg-red-50 text-red-700
+                                      hover:bg-red-100 transition" do %>
+                  <span>削除</span>
+                <% end %>
               </div>
             </div>
           </div>

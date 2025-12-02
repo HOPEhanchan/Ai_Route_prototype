@@ -6,7 +6,9 @@
         行きたいスポットの詳細
       </p>
       <h1 class="text-xl font-bold text-emerald-600 break-words">
-        <%= @spot.title.presence || "（タイトル未入力）" %>
+        <span class="block max-w-[240px] truncate sm:max-w-none sm:whitespace-normal">
+          <%= @spot.title.presence || "（タイトル未入力）" %>
+        </span>
       </h1>
     </div>
 
@@ -36,10 +38,15 @@
       <!-- メモ（description） -->
       <% if @spot.description.present? %>
         <div>
-          <p class="text-xs font-medium text-gray-500 mb-1">メモ（引用や気になるポイント）</p>
-          <p class="text-sm text-gray-700">
-            <%= @spot.description %>
+          <p class="text-xs font-medium text-gray-500 mb-1">
+            メモ（引用や気になるポイント）
           </p>
+
+          <div class="max-h-40 sm:max-h-60 overflow-y-auto
+                      rounded-lg border border-slate-200 bg-slate-50
+                      px-3 py-2 text-sm text-gray-700 whitespace-pre-line">
+            <%= @spot.description %>
+          </div>
         </div>
       <% end %>
 
