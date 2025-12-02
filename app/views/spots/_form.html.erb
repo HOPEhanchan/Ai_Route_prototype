@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <%= form_with model: spot, local: true, class: "space-y-5" do |f| %>
+  <%= form_with model: spot, local: true, class: "space-y-5", data: { controller: "spot-metadata" } do |f| %>
     <!-- URL -->
     <div>
       <div class="flex items-center justify-between mb-1">
@@ -20,9 +20,13 @@
         <span class="text-xs text-emerald-500">必須</span>
       </div>
       <%= f.url_field :url,
-            placeholder: "例）https://example.com/awesome-spot",
+            placeholder: "例）https://example.com/nice-spot",
             class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
-                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500",
+            data: {
+              spot_metadata_target: "url",
+              action: "input->spot-metadata#fetchMetadata"
+            } %>
     </div>
 
     <!-- タイトル -->
@@ -34,7 +38,8 @@
       <%= f.text_field :title,
             placeholder: "例）雰囲気最高の夜景バー",
             class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
-                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500",
+            data: { spot_metadata_target: "title" } %>
     </div>
 
     <!-- メモ（description） -->
@@ -45,7 +50,8 @@
             rows: 3,
             placeholder: "気になった理由や、サイトからの引用メモなどを書いておきましょう。",
             class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
-                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500",
+            data: { spot_metadata_target: "description" } %>
     </div>
 
     <!-- ひとことメモ -->
@@ -65,14 +71,19 @@
       <%= f.url_field :image_url,
             placeholder: "サムネイル用の画像URLがあれば入力",
             class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm
-                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+                    shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500",
+            data: {
+              spot_metadata_target: "imageUrl",
+              action: "input->spot-metadata#updateImagePreview"
+            } %>
 
-      <% if spot.image_url.present? %>
-        <div class="mt-3">
-          <%= image_tag spot.image_url,
-                class: "w-full max-h-48 object-cover rounded-lg border border-slate-200" %>
-        </div>
-      <% end %>
+      <div
+        data-spot-metadata-target="imagePreviewWrapper"
+        class="mt-3 <%= 'hidden' if spot.image_url.blank? %>">
+        <%= image_tag(spot.image_url.presence || "",
+              class: "w-full max-h-48 object-cover rounded-lg border border-slate-200",
+              data: { spot_metadata_target: "imagePreview" }) %>
+      </div>
     </div>
 
     <!-- 行き先リスト選択 -->

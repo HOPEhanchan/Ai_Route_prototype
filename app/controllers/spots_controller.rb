@@ -43,6 +43,17 @@ class SpotsController < ApplicationController
     redirect_to spots_path, notice: 'スポットを削除しました。'
   end
 
+  def fetch_metadata
+    url = params[:url].to_s
+
+    if url.blank?
+      render json: { error: 'URLが空です' }, status: :unprocessable_entity
+      return
+    end
+
+    render json: formatted_metadata(url)
+  end
+
   private
 
   def set_spot
@@ -70,5 +81,15 @@ class SpotsController < ApplicationController
     else
       current_user.spots.order(created_at: :desc)
     end
+  end
+
+  def formatted_metadata(url)
+    meta = SpotMetadataFetcher.call(url)
+
+    {
+      title: meta[:title],
+      description: meta[:description],
+      image_url: meta[:image_url]
+    }
   end
 end

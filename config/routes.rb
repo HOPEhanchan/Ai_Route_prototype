@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # 未ログイン時の root
   root 'static_pages#landing'
   # ログイン前後どっちでも見られる説明ページ
-  get "/about", to: "static_pages#landing", as: :about
+  get '/about', to: 'static_pages#landing', as: :about
 
   # ログイン後の root
   authenticated :user do
@@ -17,7 +17,12 @@ Rails.application.routes.draw do
       resources :spots, only: :index, module: :lists
     end
 
-    resources :spots
+    resources :spots do
+      collection do
+        get :fetch_metadata
+      end
+    end
+
     resource :profile, only: %i[show edit update]
   end
 
