@@ -68,8 +68,8 @@ class SpotsController < ApplicationController
       :description,
       :image_url,
       :memo,
+      :tag_names,
       list_ids: []
-      # tag_names は後続Issueで
     )
   end
 

@@ -1,7 +1,5 @@
-// app/javascript/controllers/spot_metadata_controller.js
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="spot-metadata"
 export default class extends Controller {
   static targets = [
     "url",

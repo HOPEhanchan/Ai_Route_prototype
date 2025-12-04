@@ -65,7 +65,7 @@
                 <!-- 右：ボタン縦並び -->
                 <div class="flex flex-col items-end gap-1 text-[11px] sm:text-xs flex-shrink-0">
                   <!-- 詳細 -->
-                  <%= link_to spot_path(spot),
+                  <%= link_to spot_path(spot, from: "list", list_id: @list.id),
                               class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
                                       border border-slate-200 bg-white text-gray-700
                                       hover:bg-slate-50 hover:border-emerald-200 hover:text-emerald-700
@@ -98,7 +98,11 @@
           スポットが追加されていません。
         </p>
         <p class="mt-1 text-xs text-gray-500">
-          「📍スポット」一覧から、<br>
+          メニューの
+          <%= link_to "📍スポット一覧",
+                      spots_path,
+                      class: "text-emerald-600 underline decoration-emerald-300 hover:text-emerald-700" %>
+          から、<br>
           このリストに追加していきましょう。
         </p>
       </div>

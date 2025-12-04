@@ -2,6 +2,6 @@
 
 require 'test_helper'
 
-class ListItemTest < ActiveSupport::TestCase
+class TaggingTest < ActiveSupport::TestCase
   # ここに必要なテストを書く予定
 end
