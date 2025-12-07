@@ -5,12 +5,15 @@ class SpotsController < ApplicationController
   before_action :set_spot, only: %i[show edit update destroy]
 
   def index
-    @lists = current_user.lists.order(created_at: :desc)
-    @current_list = current_user.lists.find_by(id: params[:list_id])
-    @spots = fetch_spots
+    prepare_filters
+    @spots = build_spot_scope.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    # set_spot で tags / lists まで eager load 済み
+    @lists         = current_user.lists.includes(:list_items)
+    @spot_list_ids = @spot.list_ids
+  end
 
   def new
     @spot = current_user.spots.new
@@ -26,9 +29,7 @@ class SpotsController < ApplicationController
     end
   end
 
-  def edit
-    @spot = current_user.spots.find(params[:id])
-  end
+  def edit; end
 
   def update
     if @spot.update(spot_params)
@@ -43,6 +44,7 @@ class SpotsController < ApplicationController
     redirect_to spots_path, notice: 'スポットを削除しました。'
   end
 
+  # ====== OGP / メタ情報取得 (非同期用) ======
   def fetch_metadata
     url = params[:url].to_s
 
@@ -56,9 +58,11 @@ class SpotsController < ApplicationController
 
   private
 
+  # 自分のスポット以外は見られないようにする
   def set_spot
-    # 自分のスポット以外は見られないようにする
-    @spot = current_user.spots.find(params[:id])
+    @spot = current_user.spots
+                        .includes(:tags, :lists)
+                        .find(params[:id])
   end
 
   def spot_params
@@ -73,16 +77,6 @@ class SpotsController < ApplicationController
     )
   end
 
-  def fetch_spots
-    if @current_list
-      @current_list.spots.order(created_at: :desc)
-    elsif params[:list_id].present?
-      current_user.spots.none
-    else
-      current_user.spots.order(created_at: :desc)
-    end
-  end
-
   def formatted_metadata(url)
     meta = SpotMetadataFetcher.call(url)
 
@@ -91,5 +85,43 @@ class SpotsController < ApplicationController
       description: meta[:description],
       image_url: meta[:image_url]
     }
+  end
+
+  # ====== 一覧のフィルタ用 ======
+
+  # リスト・タグの候補を用意するだけのメソッド
+  def prepare_filters
+    @lists        = current_user.lists.order(created_at: :desc)
+    @current_list = current_list_from_param(@lists)
+    @tags         = current_user.tags.distinct.order(:name)
+  end
+
+  # list_id パラメータから「選択中リスト」を返すメソッド
+  def current_list_from_param(lists)
+    return if params[:list_id].blank?
+
+    lists.find { |list| list.id == params[:list_id].to_i }
+  end
+
+  # 絞り込み用の scope を組み立てるメソッド
+  def build_spot_scope
+    scope = current_user.spots.includes(:tags, :lists)
+    scope = filter_by_list(scope)
+    filter_by_tag(scope)
+  end
+
+  def filter_by_list(scope)
+    return scope if params[:list_id].blank?
+
+    scope.joins(:lists).where(lists: { id: params[:list_id] })
+  end
+
+  def filter_by_tag(scope)
+    return scope if params[:tag].blank?
+
+    @selected_tag = Tag.find_by(name: params[:tag])
+    return scope unless @selected_tag
+
+    scope.joins(:tags).where(tags: { id: @selected_tag.id })
   end
 end
