@@ -56,7 +56,7 @@ class Spot < ApplicationRecord
     self.tags = build_tags_from(names)
   end
 
-  # "デート, 夜景  カフェ　海" みたいなのを配列にする
+  # "デート, 夜景  カフェ　海" みたいなのを配列にする　※区切りはスペースでも可能にする。
   def parsed_tag_names(raw)
     raw
       .split(/[,\s、\u3000]+/)

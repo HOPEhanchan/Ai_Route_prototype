@@ -22,19 +22,71 @@
     </div>
 
     <!-- 🔽 リストで絞り込みドロップダウン -->
-    <div class="flex items-center justify-between gap-3 mt-2 text-xs sm:text-sm">
-      <%= form_with url: spots_path, method: :get, local: true, class: "flex items-center gap-2" do |f| %>
-        <%= f.select :list_id,
-              options_for_select(
-                [["すべて", ""]] + @lists.map { |list| [list.name, list.id] },
-                (@current_list&.id&.to_s || "")
-              ),
-              {},
-              class: "rounded-full border border-slate-300 bg-white px-3 py-1.5
-                      text-xs sm:text-sm min-w-[140px]",
-              onchange: "this.form.submit()" %>
-      <% end %>
+    <div class="mt-2 text-xs sm:text-sm">
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] sm:text-xs text-slate-500 whitespace-nowrap">
+          リストで絞り込み
+        </span>
+
+        <%= form_with url: spots_path, method: :get, local: true, class: "flex-1" do |f| %>
+          <%= f.select :list_id,
+                options_for_select(
+                  [["すべて", ""]] + @lists.map { |list| [list.name, list.id] },
+                  (@current_list&.id&.to_s || "")
+                ),
+                {},
+                class: "w-full rounded-full border border-slate-300 bg-white px-3 py-1.5
+                        text-xs sm:text-sm min-w-[140px]",
+                onchange: "this.form.submit()" %>
+        <% end %>
+      </div>
     </div>
+
+    <!-- 🔽 タグで絞り込み機能 -->
+    <% if @tags.any? %>
+      <div class="mt-3 space-y-2">
+        <!-- 見出し + 注釈（PC/スマホ共通でここに置く） -->
+        <div>
+          <p class="text-[11px] sm:text-xs text-slate-500">
+            タグで絞り込み （※１つのみ）
+          </p>
+          <p class="text-[10px] text-slate-400">
+            横にスクロールすると他の登録タグが見れます 👉
+          </p>
+        </div>
+
+        <div class="flex-1 overflow-x-auto">
+          <!-- 横並びタグチップ（横スクロール） -->
+          <div class="inline-flex gap-2 pb-1">
+            <!-- 「すべて」ボタン -->
+            <% active_all = params[:tag].blank? %>
+            <%= link_to spots_path(list_id: params[:list_id]),
+                        class: [
+                          "inline-flex items-center px-3 py-1 rounded-full border text-[11px] sm:text-xs whitespace-nowrap",
+                          (active_all ?
+                            "bg-emerald-500 text-white border-emerald-500" :
+                            "bg-white text-slate-600 border-slate-300 hover:bg-slate-50")
+                        ].join(" ") do %>
+              すべて
+            <% end %>
+
+            <!-- 各タグチップ -->
+            <% @tags.each do |tag| %>
+              <% active = params[:tag] == tag.name %>
+              <%= link_to spots_path(list_id: params[:list_id], tag: tag.name),
+                          class: [
+                            "inline-flex items-center px-3 py-1 rounded-full border text-[11px] sm:text-xs whitespace-nowrap",
+                            (active ?
+                              "bg-emerald-500 text-white border-emerald-500" :
+                              "bg-white text-slate-600 border-slate-300 hover:bg-slate-50")
+                          ].join(" ") do %>
+                <span><%= tag.name %></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
     <!-- 🔽 スポットカード一覧 -->
     <% if @spots.any? %>
@@ -54,9 +106,9 @@
                   <a href="<%= spot.url %>"
                      target="_blank" rel="noopener"
                      class="inline-flex items-center text-xs text-emerald-600 hover:text-emerald-700 break-all">
-                    <span class="truncate max-w-[220px] sm:max-w-xs">
-                      <%= spot.url %>
-                    </span>
+                     <span class="truncate max-w-[220px] sm:max-w-xs">
+                       <%= spot.url %>
+                     </span>
                   </a>
                 <% end %>
               </div>
@@ -80,14 +132,19 @@
             </div>
 
             <!-- tagの表示 -->
-            <% if spot.tags.any? %>
+            <% if spot.tags.exists? %>
               <div class="mt-2 flex flex-wrap gap-1">
                 <% spot.tags.each do |tag| %>
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full
-                               bg-emerald-50 text-emerald-700 border border-emerald-100
-                               text-[10px]">
-                    #<%= tag.name %>
-                  </span>
+                  <%= link_to spots_path(tag: tag.name, list_id: @current_list&.id),
+                              class: [
+                                "inline-flex items-center px-2 py-0.5 rounded-full text-[11px] border transition",
+                                (@selected_tag&.id == tag.id ?
+                                  "bg-emerald-600 text-white border-emerald-600" :
+                                  "bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100 hover:border-emerald-200"
+                                )
+                              ].join(" ") do %>
+                    <span>#<%= tag.name %></span>
+                  <% end %>
                 <% end %>
               </div>
             <% end %>

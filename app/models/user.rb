@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :spots, dependent: :destroy
+  has_many :tags, through: :spots
 
   # プロフィール用バリデーション
   validates :name, length: { maximum: 50 }, allow_blank: true
