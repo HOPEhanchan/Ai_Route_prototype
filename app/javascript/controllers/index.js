@@ -12,3 +12,6 @@ application.register("spot-metadata", SpotMetadataController)
 
 import TagInputController from "./tag_input_controller"
 application.register("tag-input", TagInputController)
+
+import InputClearController from "./input_clear_controller"
+application.register("input-clear", InputClearController)
