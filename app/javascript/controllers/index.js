@@ -7,6 +7,9 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import InputClearController from "./input_clear_controller"
+application.register("input-clear", InputClearController)
+
 import SpotMetadataController from "./spot_metadata_controller"
 application.register("spot-metadata", SpotMetadataController)
 

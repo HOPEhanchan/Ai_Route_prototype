@@ -28,8 +28,10 @@ class ListsController < ApplicationController
   def edit; end
 
   def update
+    @list = current_user.lists.find(params[:id])
+
     if @list.update(list_params)
-      redirect_to lists_path, notice: '行きたいリストを更新しました。'
+      redirect_to list_path(@list), notice: 'リスト名を更新しました。'
     else
       render :edit, status: :unprocessable_entity
     end
