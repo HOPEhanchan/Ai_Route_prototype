@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@source "../../../app/views/**/*";
-@source "../../../app/helpers/**/*.rb";
-@source "../../../app/javascript/**/*.js";
-@source "../../../app/assets/stylesheets/**/*.css";
+@source "../../views/**/*.erb";
+@source "../../helpers/**/*.rb";
+@source "../../javascript/**/*.js";
+@source "../stylesheets/**/*.css";

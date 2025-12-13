@@ -36,14 +36,6 @@
                 <span>開く</span>
               <% end %>
 
-              <!-- 編集 -->
-              <%= link_to edit_list_path(list),
-                          class: "inline-flex items-center gap-1 px-3 py-1 rounded-lg
-                                  border border-emerald-200 bg-emerald-50 text-emerald-700
-                                  hover:bg-emerald-100 transition" do %>
-                <span>編集</span>
-              <% end %>
-
               <!-- 削除 -->
               <%= button_to list_path(list),
                             method: :delete,

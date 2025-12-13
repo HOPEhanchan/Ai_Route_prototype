@@ -14,6 +14,12 @@
 
       <!-- ボタンたち：スマホでは下に縦並び -->
       <div class="flex flex-wrap gap-2 sm:justify-end">
+        <%= link_to "+スポット追加",
+                    new_spot_path(list_id: @list.id),
+                    class: "px-3 py-1 rounded-lg bg-emerald-500 text-white
+                            hover:bg-emerald-600
+                            text-xs sm:text-sm transition" %>
+
         <%= link_to "リスト名変更",
                     edit_list_path(@list),
                     class: "px-3 py-1 rounded-lg bg-emerald-50 text-emerald-600
