@@ -19,3 +19,21 @@ ja:
         url: "スポットのURL"
       list:
         name: "リスト名"
+      contact_message:
+        name: "お名前"
+        email: "メールアドレス"
+        message: "お問い合わせ内容"
+        subject: "件名"
+        body: "本文"
+  admin:
+    contact_messages:
+      index:
+        title: "お問い合わせ一覧"
+        no_messages: "お問い合わせはまだありません。"
+        table:
+          headers:
+            id: "ID"
+            name: "お名前"
+            email: "メールアドレス"
+            created_at: "送信日時"
+          show_link: "詳細を見る"

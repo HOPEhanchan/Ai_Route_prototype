@@ -1,187 +1,118 @@
 <nav class="bg-white border-b border-gray-200">
-  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
 
-    <!-- 左側：ロゴ（タイトルの下にタグライン） -->
+    <!-- 左：ロゴ -->
     <div class="min-w-0">
-      <%= link_to(
-            (user_signed_in? ? lists_path : root_path),
-            class: "inline-flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2 no-underline"
-          ) do %>
+      <%= link_to (user_signed_in? ? lists_path : root_path),
+                  class: "inline-flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2 no-underline" do %>
 
-        <!-- アプリタイトル -->
         <span class="text-lg sm:text-xl font-bold text-emerald-500 whitespace-nowrap leading-tight">
           <%= t("header.title") %>
         </span>
 
-        <!-- タグライン（PCのみ表示） -->
-        <span class="hidden sm:block text-[11px] text-gray-500 sm:mt-0.5 leading-snug">
+        <span class="hidden sm:block text-[11px] text-gray-500 sm:mt-0.5 leading-snug truncate">
           <%= t("header.tagline") %>
         </span>
-
       <% end %>
     </div>
 
-    <!-- 右側：ナビ -->
+    <!-- 右：ナビ -->
     <% if user_signed_in? %>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
 
-        <!-- 💻 PC / タブレット用ナビ -->
-        <div class="hidden sm:flex items-center gap-3 text-xs sm:text-sm">
-
-          <!-- リスト 📝 -->
+        <!-- PC：listとspotはあえてヘッダーに出す -->
+        <div class="hidden sm:flex items-center gap-1">
           <%= link_to lists_path,
-                      class: "px-2 py-1 bg-emerald-50 text-emerald-600
-                              border border-emerald-200 rounded
-                              hover:bg-emerald-100 font-medium whitespace-nowrap
-                              flex items-center gap-1" do %>
-            <span aria-hidden="true">📝</span>
-            <span><%= t("header.nav.lists") %></span>
+                class: "px-3 py-1.5 rounded-md text-sm text-emerald-700 hover:bg-emerald-50 whitespace-nowrap" do %>
+            [📝リスト追加] <span class="hidden md:inline">リスト</span>
           <% end %>
 
-          <!-- スポット 📍 -->
           <%= link_to spots_path,
-                      class: "px-2 py-1 bg-emerald-50 text-emerald-600
-                              border border-emerald-200 rounded
-                              hover:bg-emerald-100 font-medium whitespace-nowrap
-                              flex items-center gap-1" do %>
-            <span aria-hidden="true">📍</span>
-            <span><%= t("header.nav.spots") %></span>
+                class: "px-3 py-1.5 rounded-md text-sm text-emerald-700 hover:bg-emerald-50 whitespace-nowrap" do %>
+            [📍スポット追加] <span class="hidden md:inline">スポット</span>
           <% end %>
+        </div>
 
-          <!-- アバター ＋ メール（プロフィール画面へのリンク）👤 -->
-          <%= link_to profile_path,
-                      class: "flex items-center gap-2 bg-gray-100 px-2 py-1 rounded
-                              hover:bg-emerald-50 no-underline" do %>
-
+        <!-- 右上メニュー（PC/スマホ共通の見た目） -->
+        <details class="relative">
+          <summary class="list-none cursor-pointer flex items-center gap-2 select-none">
             <% if current_user.avatar_url.present? %>
               <img src="<%= current_user.avatar_url %>"
                    alt="avatar"
-                   class="w-6 h-6 rounded-full object-cover border border-slate-300" />
+                   class="w-8 h-8 rounded-full object-cover border border-slate-300" />
             <% else %>
-              <div class="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs text-white">
+              <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white text-sm">
                 <%= current_user.email.first.upcase %>
               </div>
             <% end %>
 
-            <span class="text-gray-600 text-xs sm:text-sm max-w-[140px] truncate">
-              <%= current_user.email %>
+            <span class="text-[11px] text-slate-500 hidden sm:inline">
+              メニュー
             </span>
-          <% end %>
+            <span class="text-[10px] text-slate-400 hidden sm:inline">
+              ▼
+            </span>
+          </summary>
 
-          <!-- アプリ概要　📱 -->
-          <%= link_to "AiRouteとは?",
-                      about_path,
-                      class: "px-2 py-1 bg-white text-emerald-600
-                              border border-emerald-200 rounded
-                              hover:bg-emerald-50 font-medium whitespace-nowrap" %>
+          <div class="absolute right-0 mt-2 w-44 bg-white/95 backdrop-blur
+                      rounded-xl shadow-lg border border-emerald-100 py-2 z-30">
 
-          <!-- ログアウト -->
-          <%= button_to t("header.nav.logout"),
-                        destroy_user_session_path,
-                        method: :delete,
-                        data: { turbo_confirm: t("header.nav.logout_confirm") },
-                        class: "px-3 py-1 rounded bg-red-50 text-red-600 border border-red-200
-                                hover:bg-red-100 text-xs sm:text-sm whitespace-nowrap" %>
-        </div>
+            <p class="px-3 pb-2 text-[11px] text-slate-400 truncate">
+              <%= current_user.email %>
+            </p>
 
-        <!-- 📱 スマホ用ナビ（アバター＋ドロップダウンメニュー） -->
-        <div class="relative sm:hidden">
-          <details class="group">
-            <summary class="list-none flex items-center gap-1 cursor-pointer">
-              <% if current_user.avatar_url.present? %>
-                <img src="<%= current_user.avatar_url %>"
-                     alt="avatar"
-                     class="w-8 h-8 rounded-full object-cover border border-slate-300" />
-              <% else %>
-                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-sm text-white">
-                  <%= current_user.email.first.upcase %>
-                </div>
+            <!-- Admin -->
+            <% if current_user.admin? %>
+              <%= link_to admin_contact_messages_path,
+                    class: "block px-3 py-2 text-sm hover:bg-amber-50 text-amber-700 font-semibold" do %>
+                🛠 Admin
               <% end %>
+              <div class="my-1 border-t border-slate-100"></div>
+            <% end %>
 
-              <!-- 「メニュー ▼」でタップ誘導 -->
-              <span class="text-[11px] text-slate-500">
-                メニュー
-              </span>
-              <span class="text-[10px] text-slate-400">
-                ▼
-              </span>
-            </summary>
-
-            <!-- 開いたときに出てくるメニュー -->
-            <div class="absolute right-0 mt-2 w-44 bg-white/95 backdrop-blur
-                        rounded-xl shadow-lg border border-emerald-100 py-2 z-30">
-
-              <!-- ラベル -->
-              <p class="px-3 pb-1 text-[11px] font-semibold tracking-wide text-slate-400 uppercase">
-                メニュー
-              </p>
-
-              <!-- リスト 📝 -->
-              <%= link_to lists_path,
-                          class: "block px-3 py-2 text-xs
-                                  text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800
-                                  transition-colors" do %>
-                <span class="inline-flex items-center gap-1">
-                  <span aria-hidden="true">📝</span>
-                  <span>リスト</span>
-                </span>
+            <!-- スマホ：listとスポットもメニューに含める -->
+            <div class="sm:hidden">
+              <%= link_to lists_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" do %>
+                📝 リスト
               <% end %>
-
-              <!-- スポット 📍 -->
-              <%= link_to spots_path,
-                          class: "block px-3 py-2 text-xs
-                                  text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800
-                                  transition-colors" do %>
-                <span class="inline-flex items-center gap-1">
-                  <span aria-hidden="true">📍</span>
-                  <span>スポット</span>
-                </span>
+              <%= link_to spots_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" do %>
+                📍 スポット
               <% end %>
-
-              <!-- プロフィール 👤 -->
-              <%= link_to profile_path,
-                          class: "block px-3 py-2 text-xs
-                                  text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800
-                                  transition-colors" do %>
-                <span class="inline-flex items-center gap-1">
-                  <span aria-hidden="true">👤</span>
-                  <span>プロフィール</span>
-                </span>
-              <% end %>
-
-              <!-- アプリ概要　📱 -->
-              <%= link_to "AiRouteとは?",
-                          about_path,
-                          class: "block px-3 py-2 text-xs
-                                  text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800
-                                  transition-colors" %>
-
-              <!-- ログアウト　少し区切る -->
-              <div class="mt-1 pt-1 border-t border-slate-100">
-                <%= button_to "ログアウト",
-                              destroy_user_session_path,
-                              method: :delete,
-                              data: { turbo_confirm: t("header.nav.logout_confirm") },
-                              class: "w-full text-left px-3 py-2 text-xs
-                                      text-red-600 hover:bg-red-50
-                                      transition-colors" %>
-              </div>
+              <div class="my-1 border-t border-slate-100"></div>
             </div>
-          </details>
-        </div>
 
+            <%= link_to profile_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" do %>
+              👤 プロフィール
+            <% end %>
+
+            <%= link_to "AiRouteとは？", about_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" %>
+            <%= link_to "利用規約", terms_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" %>
+            <%= link_to "プライバシーポリシー", privacy_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" %>
+            <%= link_to "お問い合わせ", new_contact_messages_path, class: "block px-3 py-2 text-sm hover:bg-slate-50" %>
+
+            <div class="mt-2 pt-2 border-t border-slate-100">
+              <%= button_to "ログアウト",
+                    destroy_user_session_path,
+                    method: :delete,
+                    data: { turbo_confirm: t("header.nav.logout_confirm") },
+                    class: "w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50" %>
+            </div>
+          </div>
+        </details>
       </div>
+
     <% else %>
-      <!-- 未ログイン時 -->
-      <div class="flex items-center gap-3 text-xs sm:text-sm">
+      <!-- 未ログイン -->
+      <div class="flex items-center gap-3 text-xs sm:text-sm whitespace-nowrap">
         <%= link_to t("header.nav.login"),
-                    new_user_session_path,
-                    class: "text-gray-700 hover:text-emerald-500" %>
+              new_user_session_path,
+              class: "text-gray-700 hover:text-emerald-600" %>
 
         <%= link_to t("header.nav.signup"),
-                    new_user_registration_path,
-                    class: "px-3 py-1 rounded bg-emerald-500 text-white text-xs sm:text-sm hover:bg-emerald-600" %>
+              new_user_registration_path,
+              class: "px-3 py-1.5 rounded-md bg-emerald-500 text-white hover:bg-emerald-600" %>
       </div>
     <% end %>
+
   </div>
 </nav>

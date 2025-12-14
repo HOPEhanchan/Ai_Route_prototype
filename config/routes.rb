@@ -29,7 +29,13 @@ Rails.application.routes.draw do
 
     resource :profile, only: %i[show edit update]
 
+    # 一般ユーザーのお問い合わせ（new/create）
     resource :contact_messages, only: [:new, :create]
+
+    # 管理画面（一覧・詳細）
+    namespace :admin do
+      resources :contact_messages, only: %i[index show destroy]
+    end
   end
 
   # Render スリープ対策用のヘルスチェック

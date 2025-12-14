@@ -15,4 +15,8 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :validatable
+
+  def admin?
+    admin
+  end
 end
