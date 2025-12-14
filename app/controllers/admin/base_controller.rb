@@ -10,7 +10,7 @@ module Admin
     def require_admin!
       return if current_user.admin?
 
-      render file: Rails.root.join("public/403.html"), status: :forbidden, layout: false
+      render file: Rails.root.join('public/403.html'), status: :forbidden, layout: false
     end
   end
 end
