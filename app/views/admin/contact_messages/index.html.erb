@@ -1,0 +1,75 @@
+<div class="max-w-5xl mx-auto px-4 py-6">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-lg font-semibold text-gray-800">お問い合わせ一覧</h1>
+  </div>
+
+  <!-- スマホレイアウト: cards -->
+  <div class="space-y-3 sm:hidden">
+    <% @contact_messages.each do |cm| %>
+      <%= link_to admin_contact_message_path(cm),
+            class: "block bg-white border border-slate-200 rounded-xl shadow-sm p-4" do %>
+        <div class="flex items-start justify-between gap-3">
+          <div class="min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">
+              <%= cm.subject.presence || "（件名なし）" %>
+            </p>
+            <p class="text-xs text-gray-500 truncate">
+              <%= cm.name %> / <%= cm.email %>
+            </p>
+          </div>
+          <p class="text-xs text-gray-500 whitespace-nowrap">
+            <%= l(cm.created_at, format: :short) %>
+          </p>
+        </div>
+        <p class="mt-2 text-xs text-gray-600 line-clamp-2">
+          <%= cm.body %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- PCレイアウト: table -->
+  <div class="hidden sm:block bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-gray-600">
+        <tr>
+          <th class="text-left font-medium px-4 py-3">件名</th>
+          <th class="text-left font-medium px-4 py-3">送信者</th>
+          <th class="text-left font-medium px-4 py-3">受信日時</th>
+          <th class="text-right font-medium px-4 py-3">操作</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-200">
+        <% @contact_messages.each do |cm| %>
+          <tr class="hover:bg-slate-50">
+            <td class="px-4 py-3">
+              <%= link_to cm.subject.presence || "（件名なし）",
+                    admin_contact_message_path(cm),
+                    class: "text-emerald-700 hover:underline" %>
+            </td>
+            <td class="px-4 py-3 text-gray-700">
+              <div class="font-medium"><%= cm.name %></div>
+              <div class="text-xs text-gray-500"><%= cm.email %></div>
+            </td>
+            <td class="px-4 py-3 text-gray-700">
+              <%= l(cm.created_at, format: :long) %>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-2">
+                <%= link_to "詳細",
+                      admin_contact_message_path(cm),
+                      class: "text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50" %>
+
+                <%= button_to "削除",
+                      admin_contact_message_path(cm),
+                      method: :delete,
+                      data: { turbo_confirm: "削除しますか？（戻せません）" },
+                      class: "text-xs px-3 py-1.5 rounded-lg border text-red-600 hover:underline" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
