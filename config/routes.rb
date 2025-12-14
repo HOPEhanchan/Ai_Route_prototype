@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'static_pages#landing'
   # ログイン前後どっちでも見られる説明ページ
   get '/about', to: 'static_pages#landing', as: :about
+  get '/terms',   to: 'static_pages#terms',   as: :terms
+  get '/privacy', to: 'static_pages#privacy', as: :privacy
 
   # ログイン後の root
   authenticated :user do
