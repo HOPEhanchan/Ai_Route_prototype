@@ -3,18 +3,6 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-import InputClearController from "./input_clear_controller"
-application.register("input-clear", InputClearController)
-
-import SpotMetadataController from "./spot_metadata_controller"
-application.register("spot-metadata", SpotMetadataController)
-
-import TagInputController from "./tag_input_controller"
-application.register("tag-input", TagInputController)
-
-import InputClearController from "./input_clear_controller"
-application.register("input-clear", InputClearController)
+eagerLoadControllersFrom("controllers", application)

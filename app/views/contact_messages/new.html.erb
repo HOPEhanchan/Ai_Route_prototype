@@ -1,0 +1,36 @@
+<h1 class="text-xl font-semibold mb-4">お問い合わせ</h1>
+
+<%= form_with model: @contact_message, class: "space-y-4" do |f| %>
+  <% if @contact_message.errors.any? %>
+    <div class="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+      <p class="font-semibold mb-1">入力内容にエラーがあります。</p>
+      <ul class="list-disc list-inside">
+        <% @contact_message.errors.full_messages.each do |m| %>
+          <li><%= m %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "お名前" %>
+    <%= f.text_field :name, class: "mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= f.label :email, "メールアドレス", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.email_field :email, value: @contact_message.email, class: "mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= f.label :subject, "件名", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :subject, class: "mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= f.label :body, "内容", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :body, rows: 6, class: "mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" %>
+  </div>
+
+  <%= f.submit "送信する", class: "inline-flex items-center px-4 py-2 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600" %>
+<% end %>
