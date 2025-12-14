@@ -1,0 +1,29 @@
+<footer class="mt-16 bg-emerald-400 text-gray-800">
+  <div class="max-w-4xl mx-auto px-4 py-6 text-center">
+    <!-- リンク群 -->
+    <nav class="mb-3 flex justify-center gap-4 text-sm">
+      <%= link_to "利用規約",
+            terms_path,
+            class: "hover:underline hover:text-emerald-900" %>
+
+      <span>|</span>
+
+      <%= link_to "プライバシーポリシー",
+            privacy_path,
+            class: "hover:underline hover:text-emerald-900" %>
+
+      <span>|</span>
+
+      <% if user_signed_in? %>
+        <%= link_to "お問い合わせ",
+              new_contact_messages_path,
+              class: "hover:underline hover:text-emerald-900" %>
+      <% end %>
+    </nav>
+
+    <!-- コピーライト -->
+    <p class="text-xs text-gray-700">
+      © 2025 AiRoute
+    </p>
+  </div>
+</footer>
