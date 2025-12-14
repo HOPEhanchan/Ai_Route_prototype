@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "contact_messages/new"
+  get "contact_messages/create"
   # 未ログイン時の root
   root 'static_pages#landing'
   # ログイン前後どっちでも見られる説明ページ
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
     end
 
     resource :profile, only: %i[show edit update]
+
+    resource :contact_messages, only: [:new, :create]
   end
 
   # Render スリープ対策用のヘルスチェック
