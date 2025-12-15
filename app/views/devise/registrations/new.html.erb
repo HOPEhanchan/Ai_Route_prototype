@@ -23,8 +23,6 @@
       method: :post,
       html: { class: "space-y-6", data: { turbo: false } } do |f| %>
 
-      <%= render "devise/shared/error_messages", resource: resource %>
-
       <div>
         <%= f.label :email, t("devise.registrations.new.email"),
                     class: "block font-medium mb-1" %>
