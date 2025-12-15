@@ -13,3 +13,13 @@
     </ul>
   </div>
 <% end %>
+
+<% if session[:sign_up_errors] %>
+  <div class="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+    <ul class="list-disc list-inside">
+      <% session.delete(:sign_up_errors).each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

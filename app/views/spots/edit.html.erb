@@ -1,16 +1,21 @@
 <div class="min-h-[60vh] bg-slate-50">
-  <div class="max-w-md mx-auto px-4 py-8">
-    <!-- タイトル＋説明 -->
-    <div class="mb-6">
-      <h1 class="text-xl font-bold text-emerald-600">
-        行きたいスポットを編集
-      </h1>
-      <p class="mt-2 text-sm text-gray-600">
-        URLやタイトル、メモを更新して、<br>
-        「なぜここに行きたいのか」が自分にも相手にも分かりやすくなるよう整えましょう。
-      </p>
+  <div class="max-w-3xl mx-auto px-4 py-8 space-y-4">
+    <!-- 見出し行（indexっぽく） -->
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <h1 class="text-xl font-bold text-emerald-600">行きたいスポットを編集</h1>
+        <p class="mt-1 text-xs sm:text-sm text-gray-600">
+          URLやタイトル、メモを更新して「なぜ行きたいか」を整えましょう。
+        </p>
+      </div>
+
+      <div class="shrink-0">
+        <%= link_to "← 戻る", spot_path(@spot),
+              class: "text-xs sm:text-sm text-gray-500 hover:text-gray-700" %>
+      </div>
     </div>
 
+    <!-- ここは “フォームだけ” を置く（外枠の白カードは _form が持ってる） -->
     <%= render "form", spot: @spot %>
   </div>
 </div>

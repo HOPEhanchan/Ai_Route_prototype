@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get "contact_messages/new"
-  get "contact_messages/create"
   # 未ログイン時の root
   root 'static_pages#landing'
+
   # ログイン前後どっちでも見られる説明ページ
   get '/about', to: 'static_pages#landing', as: :about
   get '/terms',   to: 'static_pages#terms',   as: :terms
@@ -13,7 +12,14 @@ Rails.application.routes.draw do
     root 'lists#index', as: :authenticated_root
   end
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
+
+  devise_scope :user do
+    get  "users/sign_up/confirm", to: "users/registrations#confirm", as: :confirm_user_registration
+    post "users/sign_up/confirm", to: "users/registrations#confirm"
+  end
 
   authenticate :user do
     resources :lists do
@@ -30,7 +36,7 @@ Rails.application.routes.draw do
     resource :profile, only: %i[show edit update]
 
     # 一般ユーザーのお問い合わせ（new/create）
-    resource :contact_messages, only: [:new, :create]
+    resource :contact_messages, only: %i[new create]
 
     # 管理画面（一覧・詳細）
     namespace :admin do
