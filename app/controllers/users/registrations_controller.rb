@@ -51,7 +51,7 @@ module Users
     end
 
     def redirect_to_new_signup
-      redirect_to new_user_registration_path, alert: 'もう一度入力してください'
+      redirect_to new_user_registration_path, alert: '入力内容を確認できませんでした。最初からやり直してください。'
     end
 
     def render_new_with_errors

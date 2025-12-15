@@ -1,5 +1,5 @@
 # Ai_Route_prototype　URL
-My graduation production app (*URL未)
+https://ai-route-prototype.onrender.com/
 
 ## サービス概要
 
