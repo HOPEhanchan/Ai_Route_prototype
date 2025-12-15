@@ -1,0 +1,48 @@
+<div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+  <h1 class="text-lg font-semibold">登録内容の確認</h1>
+
+  <div class="text-sm">
+    <p class="text-slate-500">メールアドレス</p>
+    <p class="font-medium"><%= session.dig(:sign_up_params, "email") %></p>
+  </div>
+
+  <div class="text-sm"
+       data-controller="password-reveal"
+       data-password-reveal-plain-value="<%= session.dig(:sign_up_params, "password") %>">
+    <p class="text-slate-500 mb-1">パスワード</p>
+
+    <div class="relative">
+      <code
+        class="block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 pr-12 font-mono text-sm"
+        data-password-reveal-target="display"
+      >
+        ********
+      </code>
+
+      <button
+        type="button"
+        tabindex="-1"
+        aria-label="パスワードを表示"
+        class="absolute inset-y-0 right-0 px-3 text-sm text-slate-500 hover:text-slate-700"
+        data-action="
+          mousedown->password-reveal#show
+          mouseup->password-reveal#hide
+          mouseleave->password-reveal#hide
+          touchstart->password-reveal#show
+          touchend->password-reveal#hide
+        "
+      >
+        👁️‍🗨️
+      </button>
+    </div>
+  </div>
+
+  <div class="flex gap-2 pt-2">
+    <%= link_to "戻る", new_user_registration_path,
+          class: "flex-1 text-center px-4 py-2 rounded border hover:bg-slate-50" %>
+
+    <%= button_to "登録する", registration_path(resource_name),
+          method: :post,
+          class: "flex-1 px-4 py-2 rounded bg-emerald-500 text-white hover:bg-emerald-600" %>
+  </div>
+</div>

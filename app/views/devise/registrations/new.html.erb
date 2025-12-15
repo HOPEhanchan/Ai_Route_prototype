@@ -4,14 +4,13 @@
       <%= t("devise.registrations.new.title") %>
     </h2>
 
-    <%= form_for(
-      resource,
+    <%= form_for resource,
       as: resource_name,
-      url: registration_path(resource_name),
-      html: { class: "space-y-6" }
-    ) do |f| %>
+      url: user_registration_path,
+      method: :post,
+      html: { class: "space-y-6", data: { turbo: false } } do |f| %>
 
-      <%= render "devise/shared/error_messages", resource: resource %>
+      <%#= render "devise/shared/error_messages", resource: resource %>
 
       <div>
         <%= f.label :email, t("devise.registrations.new.email"),
@@ -36,24 +35,60 @@
           <% end %>
         </div>
 
-        <%= f.password_field :password,
-          autocomplete: "new-password",
-          class: "w-full border border-gray-300 rounded-lg p-3
-                  focus:ring-2 focus:ring-emerald-400 focus:outline-none" %>
+        <div data-controller="password-toggle" class="relative">
+          <%= f.password_field :password,
+                autocomplete: "new-password",
+                class: "w-full rounded-lg border border-slate-300 px-3 py-2 pr-12",
+                data: { password_toggle_target: "input" } %>
+
+          <button
+            type="button"
+            tabindex="-1"
+            aria-label="パスワードを表示"
+            class="absolute inset-y-0 right-0 px-3 text-sm text-slate-500 hover:text-slate-700"
+            data-action="
+              mousedown->password-toggle#show
+              mouseup->password-toggle#hide
+              mouseleave->password-toggle#hide
+              touchstart->password-toggle#show
+              touchend->password-toggle#hide
+            "
+          >
+            👁️‍🗨️
+          </button>
+        </div>
       </div>
 
       <div>
         <%= f.label :password_confirmation,
-                    t("devise.registrations.new.password_confirmation"),
-                    class: "block font-medium mb-1" %>
-        <%= f.password_field :password_confirmation,
-          autocomplete: "new-password",
-          class: "w-full border border-gray-300 rounded-lg p-3
-                  focus:ring-2 focus:ring-emerald-400 focus:outline-none" %>
+              t("devise.registrations.new.password_confirmation"),
+              class: "block font-medium mb-1" %>
+
+        <div data-controller="password-toggle" class="relative">
+          <%= f.password_field :password_confirmation,
+                autocomplete: "new-password",
+                class: "w-full rounded-lg border border-slate-300 px-3 py-2 pr-12",
+                data: { password_toggle_target: "input" } %>
+
+          <button
+            type="button"
+            tabindex="-1"
+            aria-label="パスワード確認を表示"
+            class="absolute inset-y-0 right-0 px-3 text-sm text-slate-500 hover:text-slate-700"
+            data-action="
+              mousedown->password-toggle#show
+              mouseup->password-toggle#hide
+              mouseleave->password-toggle#hide
+              touchstart->password-toggle#show
+              touchend->password-toggle#hide"
+          >
+            👁️‍🗨️
+          </button>
+        </div>
       </div>
 
       <div>
-        <%= f.submit t("devise.registrations.new.sign_up"),
+        <%= f.submit "確認画面へ",
           class: "w-full bg-emerald-500 text-white py-3 rounded-lg font-semibold
                   hover:bg-emerald-600 transition" %>
       </div>
