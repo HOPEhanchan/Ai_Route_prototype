@@ -17,8 +17,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    get  "users/sign_up/confirm", to: "users/registrations#confirm", as: :confirm_user_registration
-    post "users/sign_up/confirm", to: "users/registrations#confirm"
+    match "users/sign_up/confirm", to: "users/registrations#confirm", via: %i[get post], as: :confirm_user_registration
   end
 
   authenticate :user do
