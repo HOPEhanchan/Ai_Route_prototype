@@ -11,7 +11,7 @@ gem 'rails', '~> 7.2.3'
 # アプリケーション基盤
 # ========================================
 gem 'bootsnap', require: false     # 起動高速化
-gem 'pg', '~> 1.1'                 # PostgreSQL
+gem 'pg', '~> 1.6'                 # PostgreSQL
 gem 'puma', '>= 5.0'               # アプリケーションサーバ
 gem 'sprockets-rails'              # Asset Pipeline
 
