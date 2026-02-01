@@ -1,23 +1,25 @@
-# PostgreSQL. Versions 9.3 and up are supported.
-
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  username: postgres
-  password: password
+  host: <%= ENV.fetch("DB_HOST", "db") %>
+  port: <%= ENV.fetch("DB_PORT", 5432) %>
+  username: <%= ENV.fetch("DB_USER", "postgres") %>
+  password: <%= ENV.fetch("DB_PASSWORD", "password") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
   database: ai_route_prototype_development
+  #<<: *default は「default に書いてある設定を全部コピペする」 魔法。
 
 test:
   <<: *default
   database: ai_route_prototype_test
 
 production:
-  <<: *default
-  database: ai_route_prototype_production
-  username: ai_route_prototype
-  password: <%= ENV["AI_ROUTE_PROTOTYPE_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  url: <%= ENV.fetch("DATABASE_URL") %>
+  sslmode: require
+  #<<: *default で 重ね塗りになって「URL vs 個別設定」の綱引きが起こるのを防止する。
