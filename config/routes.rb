@@ -12,13 +12,7 @@ Rails.application.routes.draw do
     root 'lists#index', as: :authenticated_root
   end
 
-  devise_for :users, controllers: {
-    registrations: "users/registrations"
-  }
-
-  devise_scope :user do
-    match "users/sign_up/confirm", to: "users/registrations#confirm", via: %i[get post], as: :confirm_user_registration
-  end
+  devise_for :users
 
   authenticate :user do
     resources :lists do
