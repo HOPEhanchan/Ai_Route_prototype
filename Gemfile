@@ -45,7 +45,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 # 開発 & テスト環境
 # ========================================
 group :development, :test do
-  gem 'brakeman', require: false # セキュリティ診断
+  gem 'brakeman', '~> 8.0', require: false # セキュリティ診断
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
   gem 'rubocop-rails-omakase', require: false
 end
