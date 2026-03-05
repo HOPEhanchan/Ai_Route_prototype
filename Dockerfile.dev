@@ -9,6 +9,20 @@ RUN apt-get update -qq && \
       build-essential git curl \
       libpq-dev postgresql-client \
       libvips \
+      chromium \
+      chromium-driver \
+      fonts-liberation \
+      libnss3 \
+      libatk-bridge2.0-0 \
+      libgtk-3-0 \
+      libgbm1 \
+      libasound2 \
+      libx11-xcb1 \
+      libxcomposite1 \
+      libxdamage1 \
+      libxrandr2 \
+      libxshmfence1 \
+      xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
 ENV RAILS_ENV=development \
