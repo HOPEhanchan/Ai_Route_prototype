@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_063319) do
     t.bigint "spot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id", "spot_id"], name: "index_list_items_on_list_id_and_spot_id", unique: true
     t.index ["list_id"], name: "index_list_items_on_list_id"
     t.index ["spot_id"], name: "index_list_items_on_spot_id"
   end
@@ -42,8 +43,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_063319) do
 
   create_table "spots", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "title"
-    t.string "url"
+    t.string "title", null: false
+    t.string "url", null: false
     t.text "description"
     t.string "image_url"
     t.text "memo"
