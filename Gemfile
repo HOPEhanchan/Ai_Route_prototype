@@ -48,13 +48,16 @@ group :development, :test do
   gem 'brakeman', '~> 8.0', require: false # セキュリティ診断
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
   gem 'rubocop-rails-omakase', require: false
+
+  # Rails 7.2.3 + CI 安定化目的（minitest6対策）
+  gem 'minitest', '~> 5.0'
 end
 
 # ========================================
 # 開発専用
 # ========================================
 group :development do
-  gem 'web-console' # エラー画面の console
+  gem 'web-console'
 end
 
 # ========================================
