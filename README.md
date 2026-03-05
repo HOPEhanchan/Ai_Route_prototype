@@ -175,3 +175,12 @@ https://www.figma.com/design/LEEt7T5T72Ts4IjRKVjc0u/%E5%8D%92%E5%88%B6-AiRoute-?
 
 - MVPでは「いいね整理アプリ」として完結
 - 将来的にはAIによるプラン自動生成・マップ提案へ拡張予定
+
+### System Test (Docker)
+
+```bash
+docker compose build web
+docker compose run --rm web bundle exec rails test test:system
+```
+
+Chromium + chromedriver を Docker 内で実行して system test を動作させます。
