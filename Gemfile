@@ -50,7 +50,7 @@ group :development, :test do
   gem 'rubocop-rails-omakase', require: false
 
   # Rails 7.2.3 + CI 安定化目的（minitest6対策）
-  gem 'minitest', '~> 5.0'
+  gem 'minitest', '~> 6.0'
 end
 
 # ========================================
