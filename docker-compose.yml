@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     container_name: ai_route_web
-    command: bash -lc "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0 -p 3000"
+    command: bash -lc "bundle check || bundle install; rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0 -p 3000"
     volumes:
       - .:/rails
       - bundle-data:/usr/local/bundle
@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     container_name: ai_route_css
-    command: bash -lc "bin/rails tailwindcss:watch"
+    command: bash -lc "bundle check || bundle install; bin/rails tailwindcss:watch"
     volumes:
       - .:/rails
       - bundle-data:/usr/local/bundle
