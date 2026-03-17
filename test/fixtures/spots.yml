@@ -2,16 +2,16 @@
 
 one:
   user: one
-  title: MyString
-  url: MyString
-  description: MyText
-  image_url: MyString
-  memo: MyText
+  title: Kyoto cafe
+  url: https://example.com/kyoto-cafe
+  description: 京都のカフェ
+  image_url: https://example.com/kyoto.jpg
+  memo: テスト用のメモ1
 
 two:
   user: two
-  title: MyString
-  url: MyString
-  description: MyText
-  image_url: MyString
-  memo: MyText
+  title: Osaka Night View
+  url: https://example.com/osaka-night
+  description: 大阪の夜景
+  image_url: https://example.com/osaka.jpg
+  memo: テスト用のメモ2
