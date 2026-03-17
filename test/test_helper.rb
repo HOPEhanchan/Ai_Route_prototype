@@ -5,8 +5,8 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/mock'
 
-
-class ActiveSupport::TestCase
+module ActiveSupport
+  class TestCase
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -14,11 +14,14 @@ class ActiveSupport::TestCase
 
     # Add more helper methods to be used by all tests here...
   end
+end
 
 class Application
-    # Add more helper methods to be used by all tests here...
-  end
+  # Add more helper methods to be used by all tests here...
+end
 
-class ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
+module ActionDispatch
+  class IntegrationTest
+    include Devise::Test::IntegrationHelpers
+  end
 end

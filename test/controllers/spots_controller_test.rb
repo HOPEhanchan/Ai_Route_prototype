@@ -20,10 +20,10 @@ class SpotsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
 
     SpotMetadataFetcher.stub(:call, {
-      title: '取得タイトル',
-      description: '取得説明',
-      image_url: 'https://example.com/image.jpg'
-    }) do
+                               title: '取得タイトル',
+                               description: '取得説明',
+                               image_url: 'https://example.com/image.jpg'
+                             }) do
       assert_difference('Spot.count', 1) do
         post spots_path, params: {
           spot: {
