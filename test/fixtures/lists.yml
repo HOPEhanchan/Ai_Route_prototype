@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
   user: one
+  name: 京都で行きたい場所
 
 two:
-  name: MyString
   user: two
+  name: 大阪で行きたい場所
