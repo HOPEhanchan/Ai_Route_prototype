@@ -11,9 +11,12 @@
     </p>
 
     <% if user_signed_in? %>
-      <div class="mt-6">
+      <div class="mt-6 flex flex-col items-center gap-3">
         <%= link_to "リスト一覧へ", lists_path,
-              class: "px-5 py-2 rounded-lg bg-emerald-500 text-white text-sm hover:bg-emerald-600" %>
+            class: "px-5 py-2 rounded-lg bg-emerald-500 text-white text-sm hover:bg-emerald-600" %>
+
+        <%= link_to "使い方を見る", how_to_use_path,
+              class: "text-xs text-emerald-600 underline" %>
       </div>
     <% else %>
     <div class="mt-6 flex justify-center gap-3">
