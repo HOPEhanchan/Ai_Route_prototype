@@ -62,5 +62,21 @@
                     class: "text-emerald-500 font-semibold hover:underline" %>
       </div>
     </div>
+
+    <div class="mt-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px flex-1 bg-slate-200"></div>
+        <span class="text-sm text-slate-400">または</span>
+        <div class="h-px flex-1 bg-slate-200"></div>
+      </div>
+
+      <%= button_to user_google_oauth2_omniauth_authorize_path,
+            method: :post,
+            data: { turbo: false },
+            class: "w-full flex items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-400 transition" do %>
+        <%= image_tag "google_logo.svg", alt: "Google", class: "w-5 h-5" %>
+        <span>Googleでログイン</span>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     root 'lists#index', as: :authenticated_root
   end
 
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
   authenticate :user do
     resources :lists do

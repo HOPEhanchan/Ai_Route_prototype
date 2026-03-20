@@ -28,6 +28,8 @@ gem 'turbo-rails'                  # Turbo
 # ========================================
 gem 'devise'                       # 認証
 gem 'devise-i18n'                  # Devise の日本語化
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 gem 'rails-i18n'                   # Rails の日本語化
 
 # ========================================
