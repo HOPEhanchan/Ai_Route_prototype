@@ -2,30 +2,84 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>403 Forbidden</title>
+  <title>403 | AiRoute</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: #f8fafc;
+      color: #334155;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
     }
     .box {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      padding: 32px 24px;
       text-align: center;
+    }
+    .brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: #10b981;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      color: #0f172a;
+    }
+    p {
+      margin: 0 0 10px;
+      line-height: 1.7;
+      font-size: 14px;
+      color: #475569;
+    }
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      background: #ffffff;
+    }
+    .btn-primary {
+      background: #10b981;
+      border-color: #10b981;
+      color: white;
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>403 Forbidden</h1>
-    <p>このページにアクセスする権限がありません。</p>
+    <div class="brand">AiRoute</div>
+    <h1>このページにはアクセスできません</h1>
+    <p>ログイン状態や権限の都合により、このページを表示できませんでした。</p>
+    <p>時間をおいて再度お試しいただくか、以下のページからお戻りください。</p>
+
+    <div class="actions">
+      <a href="/" class="btn btn-primary">トップへ戻る</a>
+      <a href="/spots" class="btn">スポット一覧へ</a>
+    </div>
   </div>
 </body>
 </html>
