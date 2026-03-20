@@ -57,6 +57,7 @@ end
 # 開発専用
 # ========================================
 group :development do
+  gem 'letter_opener_web'
   gem 'web-console'
 end
 
