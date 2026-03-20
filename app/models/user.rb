@@ -14,9 +14,32 @@ class User < ApplicationRecord
          :registerable,
          :recoverable,
          :rememberable,
-         :validatable
+         :validatable,
+         :omniauthable,
+         omniauth_providers: [:google_oauth2]
 
   def admin?
     admin
+  end
+
+  def self.from_omniauth(auth)
+    user = find_by(email: auth.info.email)
+
+    if user
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name ||= auth.info.name
+      user.avatar_url ||= auth.info.image
+      user.save!
+    else
+      user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+      user.email = auth.info.email
+      user.name = auth.info.name
+      user.avatar_url = auth.info.image
+      user.password = Devise.friendly_token[0, 20]
+      user.save!
+    end
+
+    user
   end
 end
