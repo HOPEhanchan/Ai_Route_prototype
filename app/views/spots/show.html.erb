@@ -94,23 +94,41 @@
         spots_path
       end %>
 
-    <div class="flex justify-between items-center">
-      <%= link_to "戻る",
-                  back_path,
-                  class: "inline-flex items-center px-3 py-1 rounded-lg
-                          border border-slate-300 bg-white text-xs sm:text-sm
-                          text-gray-700 hover:bg-slate-100 hover:text-gray-900" %>
+      <div class="flex justify-between items-end">
+        <%= link_to "戻る",
+                    back_path,
+                    class: "inline-flex items-center px-3 py-1 rounded-lg
+                            border border-slate-300 bg-white text-xs sm:text-sm
+                            text-gray-700 hover:bg-slate-100 hover:text-gray-900" %>
 
-      <div class="flex gap-2 text-xs sm:text-sm">
-        <%= link_to "編集",
-                    edit_spot_path(@spot),
-                    class: "px-3 py-1 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100" %>
+        <div class="flex gap-2 text-xs sm:text-sm items-center shrink-0">
+        <% if @spot.url.present? %>
+          <!-- X共有 -->
+          <%= link_to "Xで共有",
+            "https://twitter.com/intent/tweet?url=#{CGI.escape(@spot.url)}&text=#{CGI.escape("#{@spot.title.presence || 'スポット'}　に行こう！ | #AiRoute https://ai-route-prototype.onrender.com/")}",
+            target: "_blank",
+            rel: "noopener",
+            style: "background:#000;color:#fff;padding:6px 12px;border-radius:8px;display:inline-block;text-decoration:none;" %>
 
-        <%= button_to "削除",
-                      spot_path(@spot),
-                      method: :delete,
-                      data: { turbo_confirm: "このスポットを削除しますか？" },
-                      class: "px-3 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100" %>
+          <!-- LINE共有 -->
+          <%= link_to "LINEで共有",
+            "https://social-plugins.line.me/lineit/share?url=#{CGI.escape(@spot.url)}",
+            target: "_blank",
+            rel: "noopener",
+            style: "background:#22c55e;color:#fff;padding:6px 12px;border-radius:8px;display:inline-block;text-decoration:none;" %>
+        <% end %>
+
+          <!-- 編集 -->
+          <%= link_to "編集",
+                      edit_spot_path(@spot),
+                      class: "px-3 py-1 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100" %>
+
+          <!-- 削除 -->
+          <%= link_to "削除",
+            spot_path(@spot),
+            data: { turbo_method: :delete, turbo_confirm: "このスポットを削除しますか？" },
+            class: "px-3 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100" %>
+        </div>
       </div>
     </div>
 
