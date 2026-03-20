@@ -1,25 +1,102 @@
-<h2>Change your password</h2>
+<div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow space-y-4 mt-10">
+  <h1 class="text-lg font-semibold text-center">パスワード再設定</h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+  <% if resource.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+      <p class="font-semibold mb-1">入力内容にエラーがあります。</p>
+      <ul class="list-disc list-inside space-y-1">
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: password_path(resource_name),
+    html: { method: :put, class: "space-y-4" }
+  ) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="text-sm">
+      <%= f.label :password, "新しいパスワード", class: "text-slate-500 mb-1 block" %>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+      <% if @minimum_password_length %>
+        <p class="text-xs text-slate-400 mb-1">
+          <%= @minimum_password_length %>文字以上で入力してください
+        </p>
+      <% end %>
 
-<%= render "devise/shared/links" %>
+      <div class="relative">
+        <%= f.password_field :password,
+              id: "reset-password",
+              autofocus: true,
+              autocomplete: "new-password",
+              class: "block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 pr-12 text-sm
+                      focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+
+        <button
+          type="button"
+          tabindex="-1"
+          aria-label="パスワードを表示"
+          class="absolute inset-y-0 right-0 px-3 text-sm text-slate-500 hover:text-slate-700"
+          onmousedown="showPassword('reset-password')"
+          onmouseup="hidePassword('reset-password')"
+          onmouseleave="hidePassword('reset-password')"
+          ontouchstart="showPassword('reset-password')"
+          ontouchend="hidePassword('reset-password')"
+        >
+          👁️‍🗨️
+        </button>
+      </div>
+    </div>
+
+    <div class="text-sm">
+      <%= f.label :password_confirmation, "新しいパスワード（確認）", class: "text-slate-500 mb-1 block" %>
+
+      <div class="relative">
+        <%= f.password_field :password_confirmation,
+              id: "reset-password-confirmation",
+              autocomplete: "new-password",
+              class: "block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 pr-12 text-sm
+                      focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" %>
+
+        <button
+          type="button"
+          tabindex="-1"
+          aria-label="確認用パスワードを表示"
+          class="absolute inset-y-0 right-0 px-3 text-sm text-slate-500 hover:text-slate-700"
+          onmousedown="showPassword('reset-password-confirmation')"
+          onmouseup="hidePassword('reset-password-confirmation')"
+          onmouseleave="hidePassword('reset-password-confirmation')"
+          ontouchstart="showPassword('reset-password-confirmation')"
+          ontouchend="hidePassword('reset-password-confirmation')"
+        >
+          👁️‍🗨️
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-2 pt-2">
+      <%= link_to "ログイン", new_session_path(resource_name),
+            class: "flex-1 text-center px-4 py-2 rounded border hover:bg-slate-50" %>
+
+      <%= f.submit "パスワードを更新する",
+            class: "flex-1 px-4 py-2 rounded bg-emerald-500 text-white hover:bg-emerald-600" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  function showPassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) field.type = "text";
+  }
+
+  function hidePassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) field.type = "password";
+  }
+</script>

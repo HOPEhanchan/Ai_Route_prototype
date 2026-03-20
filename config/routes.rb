@@ -43,4 +43,8 @@ Rails.application.routes.draw do
   # Render スリープ対策用のヘルスチェック
   get 'healthcheck',
       to: proc { [200, { 'Content-Type' => 'text/plain' }, ['ok']] }
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
