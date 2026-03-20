@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#landing', as: :about
   get '/terms',   to: 'static_pages#terms',   as: :terms
   get '/privacy', to: 'static_pages#privacy', as: :privacy
+  get "how_to_use", to: "static_pages#how_to_use"
+
 
   # ログイン後の root
   authenticated :user do
