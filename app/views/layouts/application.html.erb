@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Ai Route Prototype" %></title>
+    <title><%= content_for(:title) || "AiRoute" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <% page_title = content_for(:title) || "AiRoute" %>
+    <% page_description = content_for(:description) || "『いつか行きたい』を叶える、デートプランに変わるスポット管理アプリ" %>
+    <% page_image = content_for(:og_image) || image_url("ogp.png") %>
+    <% page_url = request.original_url %>
+
+    <meta name="description" content="<%= page_description %>">
+
+    <meta property="og:title" content="<%= page_title %>">
+    <meta property="og:description" content="<%= page_description %>">
+    <meta property="og:image" content="<%= page_image %>">
+    <meta property="og:url" content="<%= page_url %>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AiRoute">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= page_title %>">
+    <meta name="twitter:description" content="<%= page_description %>">
+    <meta name="twitter:image" content="<%= page_image %>">
 
     <%= favicon_link_tag "favicon.ico" %>
     <%= favicon_link_tag "favicon-32x32.png", type: "image/png", sizes: "32x32" %>
@@ -22,7 +41,6 @@
       <%= render 'shared/header' %>
     </header>
 
-    <!-- オーバーレイ(nokogiri) -->
     <div
       id="spot-loading-overlay"
       class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-40 hidden"
