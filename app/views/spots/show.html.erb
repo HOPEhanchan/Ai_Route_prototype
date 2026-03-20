@@ -1,3 +1,6 @@
+<% content_for :title, "#{@spot.title.presence || 'スポット'} | AiRoute" %>
+<% content_for :description, @spot.description.presence || @spot.memo.presence || "行きたいスポットの詳細ページ" %>
+
 <div class="min-h-[60vh] bg-slate-50">
   <div class="max-w-2xl mx-auto px-4 py-8 space-y-4">
     <!-- タイトル -->
