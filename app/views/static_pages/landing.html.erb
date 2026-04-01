@@ -6,8 +6,8 @@
     </h1>
 
     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
-      行きたいスポットをストックして、<br>
-      大切な人との時間をもっと素敵にする “いいね整理箱”。
+      気になったスポットを保存して、<br>
+      デートや旅行の計画につながる “いいね整理箱”。
     </p>
 
     <% if user_signed_in? %>
@@ -32,43 +32,42 @@
 </div>
 
 <div class="max-w-4xl mx-auto px-4 py-12 space-y-10">
-
   <h2 class="text-center text-2xl font-bold text-gray-800">
     AiRouteの特徴
   </h2>
 
   <div class="grid sm:grid-cols-2 gap-6">
-    <!-- カード① -->
-    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6">
-      <h3 class="text-lg font-semibold text-emerald-600 mb-2">行き先リストを作成</h3>
-      <p class="text-sm text-gray-600">
+    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6 text-center">
+      <h3 class="text-lg font-semibold text-emerald-600 mb-3">行き先リストを作成</h3>
+      <%= image_tag "feature_list.svg", class: "w-24 h-24 mx-auto mb-4" %>
+      <p class="text-sm text-gray-600 leading-relaxed">
         「次の休日」「デートで行きたい場所」など、用途別にリスト化できます。
       </p>
     </div>
 
-    <!-- カード② -->
-    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6">
-      <h3 class="text-lg font-semibold text-emerald-600 mb-2">スポットをストック</h3>
-      <p class="text-sm text-gray-600">
+    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6 text-center">
+      <h3 class="text-lg font-semibold text-emerald-600 mb-3">スポットをストック</h3>
+      <%= image_tag "feature_save.svg", class: "w-24 h-24 mx-auto mb-4" %>
+      <p class="text-sm text-gray-600 leading-relaxed">
         気になったお店やデートスポットをURLつきで保存できます。
       </p>
     </div>
 
-    <!-- カード③ -->
-    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6">
-      <h3 class="text-lg font-semibold text-emerald-600 mb-2">ひとことメモ機能</h3>
-      <p class="text-sm text-gray-600">
-        その場所の好きなところ、ポイントなどをメモすることで「なぜ行きたいと思ったか」簡単に見返せます。
+    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6 text-center">
+      <h3 class="text-lg font-semibold text-emerald-600 mb-3">ひとことメモ機能</h3>
+      <%= image_tag "feature_memo.svg", class: "w-24 h-24 mx-auto mb-4" %>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        その場所の好きなところやポイントをメモして、
+        「なぜ行きたいと思ったか」を見返せます。
       </p>
     </div>
 
-    <!-- カード④ -->
-    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6">
-      <h3 class="text-lg font-semibold text-emerald-600 mb-2">デート・旅行の計画に</h3>
-      <p class="text-sm text-gray-600">
-        行きたい場所をリストまとめるだけで、自然と次のおでかけや旅行のプランが立てられます。
+    <div class="bg-white shadow-sm border border-slate-200 rounded-xl p-6 text-center">
+      <h3 class="text-lg font-semibold text-emerald-600 mb-3">デート・旅行の計画に</h3>
+      <%= image_tag "feature_plan.svg", class: "w-24 h-24 mx-auto mb-4" %>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        行きたい場所をまとめるだけで、次のおでかけや旅行のプランが立てやすくなります。
       </p>
     </div>
   </div>
-
 </div>
