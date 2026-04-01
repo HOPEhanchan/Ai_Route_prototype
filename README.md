@@ -1,4 +1,6 @@
 # Ai_Route
+<img src="https://i.gyazo.com/e98edd91bb2314155ddb9e6ad6dbc7d0.jpg" width="750"/>
+
 https://ai-route-prototype.onrender.com/
 
 ## サービス概要
