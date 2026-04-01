@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<!-- map -->
+<rect x="20" y="30" width="80" height="60" rx="6"/>
+
+<!-- route -->
+<path d="M35 70 C50 40, 70 90, 85 50"/>
+
+<!-- points -->
+<circle cx="35" cy="70" r="3"/>
+<circle cx="85" cy="50" r="3"/>
+
+</svg>
